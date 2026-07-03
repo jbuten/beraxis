@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# BERAXIS — local dev runner
+# BERAXIS Landing Page — local dev runner
 # Usage:
 #   ./run.sh            # start landing-page
 #   ./run.sh --logs     # tail logs only (app already running)
@@ -21,7 +21,7 @@ BOLD='\033[1m'; RESET='\033[0m'
 declare -a NAMES=( "landing-page" )
 declare -a PORTS=( "3000"         )
 declare -a DIRS=(
-  "$ROOT/landing-page"
+  "$ROOT"
 )
 declare -a CMDS=(
   "npm run dev"
@@ -148,7 +148,7 @@ fi
 : > "$LOGS_DIR/.pids"
 
 echo ""
-echo -e "${BOLD}BERAXIS — local dev${RESET}"
+echo -e "${BOLD}BERAXIS Landing Page — local dev${RESET}"
 echo -e "Logs: ${BLUE}${LOGS_DIR}/${RESET}"
 echo ""
 
