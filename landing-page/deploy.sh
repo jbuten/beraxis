@@ -24,7 +24,7 @@ APP_DIR="$REMOTE_BASE/landing-page"
 
 IMAGE_NAME="beraxis_landing"
 CONTAINER_NAME="beraxis_landing"
-HOST_PORT="3000"
+HOST_PORT="3700"
 BACKUP_TAG="backup-$(date +%Y%m%d-%H%M%S)"
 
 # Root directory of the repository (one level up from landing-page)

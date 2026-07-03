@@ -4,7 +4,7 @@
 #   ./run.sh            # start landing-page
 #   ./run.sh --logs     # tail logs only (app already running)
 #
-# Ports: landing-page=3000
+# Ports: landing-page=3700
 
 set -euo pipefail
 
@@ -19,12 +19,12 @@ BOLD='\033[1m'; RESET='\033[0m'
 
 # ── App definitions: name  port  dir  dev-command ────────────────────────────
 declare -a NAMES=( "landing-page" )
-declare -a PORTS=( "3000"         )
+declare -a PORTS=( "3700"         )
 declare -a DIRS=(
   "$ROOT"
 )
 declare -a CMDS=(
-  "npm run dev"
+  "PORT=3700 npm run dev"
 )
 declare -a COLORS=( "$CYAN" )
 
