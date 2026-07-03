@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 # BERAXIS — local dev runner
 # Usage:
-#   ./run.sh            # start all apps (landing-page and brandbook)
-#   ./run.sh landing    # start landing-page only
-#   ./run.sh brandbook  # start brandbook only
-#   ./run.sh --logs     # tail logs only (apps already running)
+#   ./run.sh            # start landing-page
+#   ./run.sh --logs     # tail logs only (app already running)
 #
-# Ports: landing-page=3000  brandbook=5000
+# Ports: landing-page=3000
 
 set -euo pipefail
 
@@ -20,17 +18,15 @@ MAGENTA='\033[0;35m'; GREEN='\033[0;32m'; BLUE='\033[0;34m'
 BOLD='\033[1m'; RESET='\033[0m'
 
 # ── App definitions: name  port  dir  dev-command ────────────────────────────
-declare -a NAMES=( "landing-page"   "brandbook"   )
-declare -a PORTS=( "3000"           "5000"        )
+declare -a NAMES=( "landing-page" )
+declare -a PORTS=( "3000"         )
 declare -a DIRS=(
   "$ROOT/landing-page"
-  "$ROOT"
 )
 declare -a CMDS=(
   "npm run dev"
-  "npx -y serve -l 5000"
 )
-declare -a COLORS=( "$CYAN" "$GREEN" )
+declare -a COLORS=( "$CYAN" )
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 log()  { echo -e "${BOLD}[run]${RESET} $*"; }
