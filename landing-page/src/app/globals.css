@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@theme {
+  --color-beraxis-green: #078B4C;
+  --color-beraxis-blue: #042444;
+  --color-beraxis-orange: #F9A018;
+  --color-beraxis-white: #FFFFFF;
+  --color-beraxis-gray: #F1F3F7;
+  --color-beraxis-dark: #020813;
+  
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-sora: var(--font-sora), system-ui, -apple-system, sans-serif;
+
+  --animate-glow: glow 8s infinite alternate;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes glow {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+      filter: blur(80px);
+      opacity: 0.4;
+    }
+    50% {
+      transform: translate(30px, -50px) scale(1.2);
+      filter: blur(100px);
+      opacity: 0.6;
+    }
+    100% {
+      transform: translate(-20px, 20px) scale(0.9);
+      filter: blur(80px);
+      opacity: 0.4;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+:root {
+  --background: #020813;
+  --foreground: #F1F3F7;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+}
+
+/* Glassmorphism Card Style */
+.glass-card {
+  background: rgba(4, 36, 68, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card-interactive {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-interactive:hover {
+  background: rgba(4, 36, 68, 0.4);
+  border-color: rgba(7, 139, 76, 0.3); /* Verde Beraxis glow soft */
+  box-shadow: 0 12px 40px 0 rgba(7, 139, 76, 0.1), inset 0 0 12px 0 rgba(255, 255, 255, 0.02);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020813;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(4, 36, 68, 0.8);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #078B4C;
+}
+
+/* Form validation styles utilizing modern :user-invalid and :user-valid */
+input:user-invalid,
+textarea:user-invalid {
+  border-color: rgba(249, 160, 24, 0.5) !important; /* Orange glow */
+  background-color: rgba(249, 160, 24, 0.03);
+}
+
+input:user-invalid + .error-msg,
+textarea:user-invalid + .error-msg {
+  display: block;
+}
+
+input:user-valid:not(:placeholder-shown),
+textarea:user-valid:not(:placeholder-shown) {
+  border-color: rgba(7, 139, 76, 0.5) !important; /* Green glow */
+  background-color: rgba(7, 139, 76, 0.02);
+}

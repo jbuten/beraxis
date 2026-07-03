@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicios Profesionales de Tecnología - BERAXIS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ── Variables de marca BERAXIS ── */
+    :root {
+      --green: #139a43;
+      --blue: #0b2545;
+      --orange: #f39200;
+      --gray-light: #f4f6f9;
+      --gray-mid: #e2e8f0;
+      --gray-text: #334155;
+      --gray-muted: #64748b;
+      --white: #ffffff;
+      --font-title: 'Orbitron', 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --space-section: 4.5mm;
+      --space-divider: 3.5mm;
+    }
+
+    /* ── Reset ── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--blue);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      background: var(--gray-light);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    /* ── Hoja carta ── */
+    .page {
+      background: var(--white);
+      width: 215.9mm;
+      min-height: 279.4mm;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      padding: 10mm 12mm;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* ── Barra superior ── */
+    .top-bar {
+      height: 4px;
+      background: linear-gradient(to right, var(--green) 70%, var(--orange) 30%);
+      margin-bottom: var(--space-section);
+      border-radius: 2px;
+    }
+
+    /* ── Encabezado ── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--space-section);
+    }
+
+    .header-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 3mm;
+    }
+
+    .header-logo svg {
+      width: 175px;
+      height: auto;
+    }
+
+    .header-service-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .header-service-title h1 {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .header-service-title h2 {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gray-text);
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    .header-service-title p.service-period {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 400;
+      color: var(--gray-muted);
+      line-height: 1.2;
+      margin-top: 1px;
+    }
+
+    .header-meta {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .invoice-number {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 0.02em;
+    }
+
+    .invoice-meta-row {
+      font-size: 0.7rem;
+      color: var(--gray-muted);
+    }
+
+    .invoice-meta-row span {
+      font-weight: 600;
+      color: var(--blue);
+    }
+
+    .badge-status {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 3px 8px;
+      background: #eafaf1;
+      border: 1px solid #139a43;
+      color: #139a43;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-radius: 4px;
+    }
+
+    /* ── Divisor ── */
+    .divider {
+      height: 1px;
+      background: var(--gray-mid);
+      margin: var(--space-divider) 0;
+    }
+
+    /* ── Proveedor / Cliente ── */
+    .parties {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+      margin-bottom: var(--space-section);
+    }
+
+    .party-box {
+      border-radius: 6px;
+      padding: 3.5mm 4.5mm;
+      border-left: 3px solid var(--green);
+      background: var(--gray-light);
+    }
+
+    .party-box.client {
+      border-left-color: var(--orange);
+    }
+
+    .party-label {
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray-muted);
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .party-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 4px;
+    }
+
+    .party-detail {
+      font-size: 0.7rem;
+      color: var(--gray-text);
+      line-height: 1.55;
+    }
+
+    /* ── Resumen ejecutivo ── */
+    .summary-box {
+      background: var(--blue);
+      color: var(--white);
+      border-radius: 6px;
+      padding: 4mm 5mm;
+      margin-bottom: var(--space-section);
+      font-size: 0.72rem;
+      line-height: 1.6;
+    }
+
+    .summary-box strong {
+      display: block;
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--green);
+      margin-bottom: 3px;
+    }
+
+    /* ── Resultados del servicio ── */
+    .results-section {
+      margin-bottom: var(--space-section);
+    }
+
+    .results-title {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray-muted);
+      font-weight: 700;
+      margin-bottom: 2mm;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2mm 5mm;
+      background: var(--white);
+      border: 1px solid var(--gray-mid);
+      border-radius: 6px;
+      padding: 3.5mm 4.5mm;
+    }
+
+    .result-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.68rem;
+      color: var(--gray-text);
+      line-height: 1.35;
+    }
+
+    .result-icon {
+      flex-shrink: 0;
+      width: 12px;
+      height: 12px;
+      margin-top: 2px;
+      color: var(--green);
+    }
+
+    /* ── Sección de servicios ── */
+    .services-section {
+      margin-bottom: var(--space-section);
+    }
+
+    .section-title {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray-muted);
+      font-weight: 700;
+      margin-bottom: 2mm;
+    }
+
+    /* ── Tabla ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.7rem;
+    }
+
+    thead tr {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    thead th {
+      padding: 5px 8px;
+      text-align: left;
+      font-size: 0.62rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    thead th.col-valor {
+      text-align: right;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--gray-mid);
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--gray-light);
+    }
+
+    tbody tr:nth-child(odd) {
+      background: var(--white);
+    }
+
+    tbody td {
+      padding: 7px 8px;
+      vertical-align: top;
+      line-height: 1.45;
+      color: var(--gray-text);
+    }
+
+    /* Columna Servicio */
+    .col-servicio {
+      font-weight: 700;
+      color: var(--blue);
+      width: 25%;
+      font-size: 0.72rem;
+    }
+
+    /* Columna Alcance */
+    .col-alcance {
+      width: 53%;
+    }
+
+    /* Columna Valor */
+    .col-valor {
+      text-align: right;
+      white-space: nowrap;
+      width: 22%;
+      vertical-align: top;
+    }
+
+    .valor-label {
+      display: block;
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      color: var(--gray-muted);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+    }
+
+    .valor-amount {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    /* ── Total ── */
+    .total-card {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: var(--space-section);
+    }
+
+    .total-inner {
+      background: var(--blue);
+      border-radius: 6px;
+      padding: 3.5mm 5.5mm;
+      min-width: 240px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 4px 12px rgba(11, 37, 69, 0.12);
+    }
+
+    .total-labels {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      text-align: left;
+    }
+
+    .total-subtitle {
+      font-size: 0.52rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .total-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .total-amount {
+      font-family: var(--font-title);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Nota ejecutiva ── */
+    .value-note {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-left: 3px solid var(--green);
+      border-radius: 6px;
+      padding: 3mm 4mm;
+      font-size: 0.68rem;
+      line-height: 1.45;
+      color: var(--gray-text);
+      margin-bottom: var(--space-section);
+    }
+
+    .value-note strong {
+      display: block;
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--green);
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    /* ── Firmas ── */
+    .signature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6mm;
+      margin-bottom: var(--space-section);
+    }
+
+    .sig-box {
+      border-top: 1px solid var(--gray-mid);
+      padding-top: 2mm;
+    }
+
+    .sig-name {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .sig-title {
+      font-size: 0.62rem;
+      color: var(--gray-muted);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: auto;
+      border-top: 1px solid var(--gray-mid);
+      padding-top: 3mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .footer-signature {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      font-size: 0.52rem;
+      line-height: 1.35;
+      color: var(--gray-muted);
+    }
+
+    .footer-signature strong {
+      font-family: var(--font-title);
+      font-size: 0.62rem;
+      color: var(--blue);
+      letter-spacing: 0.08em;
+      margin-bottom: 2px;
+    }
+
+    .footer-ref {
+      font-size: 0.62rem;
+      color: var(--gray-muted);
+    }
+
+    /* ── Print ── */
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+
+      .page {
+        width: 100%;
+        min-height: auto;
+        box-shadow: none;
+        padding: 8mm 10mm;
+      }
+
+      @page {
+        size: letter;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- Barra de color -->
+    <div class="top-bar"></div>
+
+    <!-- ── Encabezado ── -->
+    <div class="header">
+      <div class="header-brand">
+        <div class="header-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="200" height="50">
+            <defs>
+              <style>
+                .bt {
+                  font-family: 'Orbitron', 'Segoe UI', sans-serif;
+                  font-weight: 700;
+                  fill: #0b2545;
+                  letter-spacing: 0.18em;
+                }
+              </style>
+            </defs>
+            <g transform="translate(120,100) scale(0.132) translate(-1011.5,-831)">
+              <path
+                d="M 562.7,319.6 L 1141.0,319.0 L 1236.0,320.0 L 1267.0,322.5 L 1290.0,326.5 L 1317.0,334.0 L 1341.0,343.5 L 1365.0,355.9 L 1386.0,369.8 L 1412.0,390.9 L 1427.1,406.0 L 1444.4,427.0 L 1461.3,453.0 L 1472.1,475.0 L 1482.6,503.0 L 1489.2,529.0 L 1493.1,556.0 L 1494.6,590.0 L 1493.1,611.0 L 1488.3,641.0 L 1481.5,667.9 L 1465.1,709.8 L 1460.4,719.2 L 1457.6,721.8 L 1455.7,717.8 L 1453.3,690.2 L 1447.5,674.6 L 1435.2,649.0 L 1419.4,628.0 L 1399.7,609.1 L 1378.0,594.7 L 1350.4,581.2 L 1321.0,572.5 L 1299.0,569.0 L 1281.0,568.0 L 809.0,568.0 L 799.0,567.3 L 792.0,565.0 L 785.0,560.8 L 776.0,553.0 L 559.1,338.0 L 554.8,331.9 L 552.8,325.4 L 555.2,322.2 L 561.8,319.7 Z"
+                fill="#139a43" />
+              <path
+                d="M 1092.5,676.9 L 1408.0,677.0 L 1440.5,679.6 L 1445.9,683.4 L 1448.7,690.0 L 1451.7,710.0 L 1451.2,732.0 L 1447.0,744.0 L 1413.6,805.0 L 1401.4,821.0 L 1380.5,844.7 L 1345.6,874.9 L 1334.0,883.0 L 1318.0,891.8 L 1300.0,900.0 L 1281.0,906.9 L 1254.0,913.8 L 1227.0,917.6 L 1040.0,918.0 L 1033.0,919.0 L 1026.3,922.4 L 1019.1,929.0 L 984.6,970.0 L 726.2,1285.0 L 714.0,1295.2 L 708.0,1297.3 L 701.0,1298.0 L 501.0,1297.6 L 491.4,1294.4 L 485.1,1287.7 L 483.2,1279.0 L 487.0,1269.0 L 494.2,1260.2 L 532.8,1223.0 L 545.9,1207.0 L 862.0,733.0 L 884.9,699.0 L 893.5,688.3 L 905.0,680.0 L 918.0,677.1 L 1091.5,676.9 Z"
+                fill="#0b2545" />
+              <path
+                d="M 1406.9,826.2 L 1415.0,828.9 L 1445.0,851.7 L 1462.6,868.0 L 1480.5,887.7 L 1491.9,902.0 L 1504.5,921.0 L 1519.3,952.0 L 1525.4,967.0 L 1530.2,984.0 L 1536.4,1015.0 L 1538.4,1033.0 L 1539.8,1055.0 L 1539.2,1072.0 L 1533.9,1109.0 L 1522.3,1153.0 L 1505.9,1190.0 L 1485.7,1221.0 L 1454.8,1257.5 L 1417.0,1289.5 L 1385.0,1309.1 L 1363.0,1319.2 L 1338.0,1328.3 L 1302.0,1337.4 L 1278.0,1340.9 L 1245.0,1343.0 L 1213.0,1342.0 L 1166.0,1343.0 L 1114.0,1342.0 L 1063.0,1343.0 L 881.0,1342.0 L 850.0,1343.0 L 809.0,1341.9 L 805.2,1340.3 L 804.5,1337.7 L 808.1,1331.0 L 822.1,1315.0 L 914.4,1214.0 L 1007.5,1114.1 L 1016.0,1107.7 L 1025.0,1105.5 L 1230.0,1105.2 L 1254.0,1103.9 L 1279.0,1098.5 L 1302.0,1090.5 L 1329.0,1075.6 L 1347.2,1062.1 L 1367.2,1040.0 L 1380.3,1020.0 L 1387.5,1001.0 L 1392.7,972.0 L 1392.1,947.0 L 1386.7,925.0 L 1378.1,906.0 L 1360.4,881.0 L 1358.9,876.3 L 1359.1,872.7 L 1362.3,867.6 L 1382.9,849.0 L 1400.3,829.6 L 1406.0,826.3 Z"
+                fill="#f39200" />
+            </g>
+            <text x="230" y="122" font-size="72" class="bt">BERAXIS</text>
+          </svg>
+        </div>
+        <div class="header-service-title">
+          <h1>Servicios Profesionales de Tecnología</h1>
+          <h2>Honorarios Profesionales por Dirección Tecnológica Externa</h2>
+          <p class="service-period">Período de servicios: Diciembre 2025 – Junio 2026</p>
+        </div>
+      </div>
+
+      <div class="header-meta">
+        <div class="invoice-meta-row">Fecha: <span>03 de julio de 2026</span></div>
+        <div class="invoice-meta-row">Período: <span>Diciembre 2025 – Junio 2026</span></div>
+        <div><span class="badge-status">Servicios Prestados</span></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── Proveedor / Cliente ── -->
+    <div class="parties">
+      <div class="party-box">
+        <div class="party-label">Proveedor</div>
+        <div class="party-name">BERAXIS</div>
+        <div class="party-detail">
+          Servicios Profesionales de Tecnología<br>
+          Email: jbuten@beraxis.com<br>
+          Tel: (809) 710-7474
+        </div>
+      </div>
+
+      <div class="party-box client">
+        <div class="party-label">Cliente</div>
+        <div class="party-name">Juan Vilchez</div>
+        <div class="party-detail">
+          Paymo / AmmyStar — Proyecto: Paymo EWA<br>
+          Calle Luis F. Thomen 110<br>
+          Torre Ejecutiva Gapo Suite 211, Evaristo Morales<br>
+          Santo Domingo, Distrito Nacional 10147<br>
+          Tel: (809) 286-2580
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Resumen ejecutivo ── -->
+    <div class="summary-box">
+      <strong>Descripción del servicio</strong>
+      Durante el período comprendido entre diciembre de 2025 y junio de 2026, BERAXIS asumió la Dirección Tecnológica
+      externa de Paymo, siendo responsable de la arquitectura del producto, ingeniería de software, infraestructura
+      tecnológica, seguridad, administración de plataformas y soporte operativo necesarios para la evolución y
+      continuidad de la plataforma Paymo EWA.
+    </div>
+
+    <!-- ── Resultados del servicio ── -->
+    <div class="results-section">
+      <div class="results-title">Principales Resultados Alcanzados</div>
+      <div class="results-grid">
+        <div class="result-item">
+          <svg class="result-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <span>Evolución continua de la plataforma Paymo EWA.</span>
+        </div>
+        <div class="result-item">
+          <svg class="result-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <span>Dirección tecnológica y supervisión de la arquitectura.</span>
+        </div>
+        <div class="result-item">
+          <svg class="result-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <span>Plataforma operando en ambiente de producción.</span>
+        </div>
+        <div class="result-item">
+          <svg class="result-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <span>Administración de infraestructura y seguridad.</span>
+        </div>
+        <div class="result-item">
+          <svg class="result-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <span>Soporte técnico especializado a la operación.</span>
+        </div>
+        <div class="result-item">
+          <svg class="result-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <span>Implementación continua de mejoras funcionales.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Tabla de servicios ── -->
+    <div class="services-section">
+      <div class="section-title">Alcance de los Servicios Profesionales</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Servicio</th>
+            <th>Alcance</th>
+            <th class="col-valor">Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-servicio">Dirección Tecnológica (CTO)</td>
+            <td class="col-alcance">
+              Dirección estratégica y supervisión de la arquitectura de la plataforma, establecimiento de estándares
+              técnicos globales de ingeniería y gobernanza del desarrollo tecnológico.
+            </td>
+            <td class="col-valor">
+              <span class="valor-label">Honorarios</span>
+              <span class="valor-amount">58,000</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="col-servicio">Ingeniería de Software</td>
+            <td class="col-alcance">
+              Ejecución de actividades de ingeniería, diseño de sistemas y desarrollo evolutivo para asegurar la
+              robustez, escalabilidad y continuo avance del ecosistema de software.
+            </td>
+            <td class="col-valor">
+              <span class="valor-label">Honorarios</span>
+              <span class="valor-amount">82,000</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="col-servicio">Operación e Infraestructura Tecnológica</td>
+            <td class="col-alcance">
+              Gestión y optimización de la infraestructura cloud, administración de entornos de producción, bases de
+              datos, despliegues automatizados y supervisión proactiva para garantizar la continuidad operativa.
+            </td>
+            <td class="col-valor">
+              <span class="valor-label">Honorarios</span>
+              <span class="valor-amount">48,000</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="col-servicio">Administración y Soporte Tecnológico</td>
+            <td class="col-alcance">
+              Gestión de plataformas corporativas de soporte, aprovisionamiento de servicios de DNS y seguridad de
+              dominios, consultoría y soporte especializado permanente para la operación.
+            </td>
+            <td class="col-valor">
+              <span class="valor-label">Honorarios</span>
+              <span class="valor-amount">37,000</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── Total ── -->
+    <div class="total-card">
+      <div class="total-inner">
+        <div class="total-labels">
+          <span class="total-subtitle">Honorarios acumulados</span>
+          <span class="total-label">Honorarios Profesionales</span>
+        </div>
+        <div class="total-amount">RD$225,000</div>
+      </div>
+    </div>
+
+    <!-- ── Nota ejecutiva ── -->
+    <div class="value-note" style="margin-bottom: 50px">
+      <strong>Nota</strong>
+      Los honorarios descritos corresponden a la prestación continua de servicios profesionales de Dirección Tecnológica
+      durante el período diciembre 2025 – junio 2026, incluyendo responsabilidades de arquitectura empresarial,
+      ingeniería de software, infraestructura tecnológica, seguridad, administración de plataformas y continuidad
+      operativa de Paymo EWA.
+    </div>
+
+    <!-- ── Firmas ── -->
+    <div class="signature-row">
+      <div class="sig-box">
+        <div class="sig-name">BERAXIS</div>
+        <div class="sig-title">Emisor — Proveedor de servicios</div>
+      </div>
+      <div class="sig-box">
+        <div class="sig-name">Juan Vilchez — Paymo / AmmyStar</div>
+        <div class="sig-title">Receptor — Aceptación y aprobación de pago</div>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>

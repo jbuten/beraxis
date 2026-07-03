@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beraxis - Manual de Identidad Visual &amp; Brandbook</title>
+  <meta name="description" content="Manual de identidad corporativa interactivo para Beraxis, soluciones de software y transformación digital.">
+  <link rel="icon" type="image/png" href="assets/favicon-32x32.png">
+  
+  <!-- Identity CSS Stylesheet -->
+  <link rel="stylesheet" href="assets/beraxis-identity.css">
+  
+  <!-- Showcase Page Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header id="main-header" class="header-container">
+    <div class="header-logo">
+      <img id="nav-logo" src="assets/logo_principal.svg" alt="Beraxis Logo" class="logo-img">
+    </div>
+    <div class="header-nav">
+      <a href="#brand-identity" class="nav-link">Identidad</a>
+      <a href="#color-palette" class="nav-link">Colores</a>
+      <a href="#typography" class="nav-link">Tipografía</a>
+      <a href="#brand-assets" class="nav-link">Descargas</a>
+      <a href="#ui-components" class="nav-link">Componentes UI</a>
+      <a href="#mockups" class="nav-link">Maquetas</a>
+    </div>
+    <div class="theme-switch-wrapper">
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="sun-icon"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="moon-icon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    
+    <!-- Brand Identity Hero -->
+    <section id="brand-identity" class="hero-section">
+      <div class="hero-badge"><span class="badge-beraxis badge-green">Marca Registrada</span></div>
+      <h1 class="hero-title brand-title">BERAXIS</h1>
+      <p class="hero-subtitle brand-body">
+        CTO de confianza, soluciones empresariales y arquitectura de software de alto nivel.
+        Fundada por <strong>José Buten</strong> para guiar a bancos, fintechs y cooperativas en su proceso de transformación digital.
+      </p>
+      
+      <!-- Quick Info Cards -->
+      <div class="grid-layout cols-3">
+        <div class="card-beraxis">
+          <div class="card-icon">⚡</div>
+          <h3 class="brand-title">Visión Estratégica</h3>
+          <p class="brand-body">Diseño e integración de sistemas core y plataformas transaccionales con seguridad y escalabilidad.</p>
+        </div>
+        <div class="card-beraxis">
+          <div class="card-icon">🔒</div>
+          <h3 class="brand-title">Confianza Corporativa</h3>
+          <p class="brand-body">Herramientas de firma digital, verificación y auditoría bajo los más altos estándares regulatorios.</p>
+        </div>
+        <div class="card-beraxis">
+          <div class="card-icon">🚀</div>
+          <h3 class="brand-title">Innovación Digital</h3>
+          <p class="brand-body">Productos SaaS premium listos para conectar mediante API e impulsar nuevos canales de negocio.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Color Palette Section -->
+    <section id="color-palette" class="section-container">
+      <h2 class="section-title brand-title">Paleta de Colores Oficial</h2>
+      <p class="section-desc brand-body">
+        La combinación exacta de colores premium para proyectar solidez tecnológica, innovación y energía empresarial. 
+        Haz clic en cualquier valor para copiarlo al portapapeles.
+      </p>
+      
+      <div class="colors-grid">
+        <!-- Azul Corporativo -->
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: var(--beraxis-blue);" id="color-blue-swatch"></div>
+          <div class="color-info">
+            <h3 class="color-name brand-title">Azul Corporativo</h3>
+            <p class="color-usage">Fondo primario, textos de cabecera, seriedad y solidez.</p>
+            <div class="color-code" id="hex-blue" onclick="copyToClipboard('#0B2545', 'HEX azul')">
+              <span>HEX:</span> <code>#0B2545</code> <span class="copy-hint">Copiar</span>
+            </div>
+            <div class="color-code" id="rgb-blue" onclick="copyToClipboard('rgb(11, 37, 69)', 'RGB azul')">
+              <span>RGB:</span> <code>11, 37, 69</code> <span class="copy-hint">Copiar</span>
+            </div>
+            <div class="color-code" id="cmyk-blue" onclick="copyToClipboard('100, 80, 30, 20', 'CMYK azul')">
+              <span>CMYK:</span> <code>100, 80, 30, 20</code> <span class="copy-hint">Copiar</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Verde Innovación -->
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: var(--beraxis-green);" id="color-green-swatch"></div>
+          <div class="color-info">
+            <h3 class="color-name brand-title">Verde Innovación</h3>
+            <p class="color-usage">Énfasis de éxito, botones principales, crecimiento y tecnología.</p>
+            <div class="color-code" id="hex-green" onclick="copyToClipboard('#139A43', 'HEX verde')">
+              <span>HEX:</span> <code>#139A43</code> <span class="copy-hint">Copiar</span>
+            </div>
+            <div class="color-code" id="rgb-green" onclick="copyToClipboard('rgb(19, 154, 67)', 'RGB verde')">
+              <span>RGB:</span> <code>19, 154, 67</code> <span class="copy-hint">Copiar</span>
+            </div>
+            <div class="color-code" id="cmyk-green" onclick="copyToClipboard('85, 10, 100, 0', 'CMYK verde')">
+              <span>CMYK:</span> <code>85, 10, 100, 0</code> <span class="copy-hint">Copiar</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Naranja Energía -->
+        <div class="color-card">
+          <div class="color-swatch" style="background-color: var(--beraxis-orange);" id="color-orange-swatch"></div>
+          <div class="color-info">
+            <h3 class="color-name brand-title">Naranja Energía</h3>
+            <p class="color-usage">Llamadas a la acción secundarias, alertas, tracción y dinamismo.</p>
+            <div class="color-code" id="hex-orange" onclick="copyToClipboard('#F39200', 'HEX naranja')">
+              <span>HEX:</span> <code>#F39200</code> <span class="copy-hint">Copiar</span>
+            </div>
+            <div class="color-code" id="rgb-orange" onclick="copyToClipboard('rgb(243, 146, 0)', 'RGB naranja')">
+              <span>RGB:</span> <code>243, 146, 0</code> <span class="copy-hint">Copiar</span>
+            </div>
+            <div class="color-code" id="cmyk-orange" onclick="copyToClipboard('0, 50, 100, 0', 'CMYK naranja')">
+              <span>CMYK:</span> <code>0, 50, 100, 0</code> <span class="copy-hint">Copiar</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blanco Puro -->
+        <div class="color-card">
+          <div class="color-swatch border-swatch" style="background-color: var(--beraxis-white);" id="color-white-swatch"></div>
+          <div class="color-info">
+            <h3 class="color-name brand-title">Blanco Puro</h3>
+            <p class="color-usage">Fondos limpios, contrastes nítidos, espacio de lectura.</p>
+            <div class="color-code" id="hex-white" onclick="copyToClipboard('#FFFFFF', 'HEX blanco')">
+              <span>HEX:</span> <code>#FFFFFF</code> <span class="copy-hint">Copiar</span>
+            </div>
+            <div class="color-code" id="rgb-white" onclick="copyToClipboard('rgb(255, 255, 255)', 'RGB blanco')">
+              <span>RGB:</span> <code>255, 255, 255</code> <span class="copy-hint">Copiar</span>
+            </div>
+            <div class="color-code" id="cmyk-white" onclick="copyToClipboard('0, 0, 0, 0', 'CMYK blanco')">
+              <span>CMYK:</span> <code>0, 0, 0, 0</code> <span class="copy-hint">Copiar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Typography Sandbox -->
+    <section id="typography" class="section-container">
+      <h2 class="section-title brand-title">Tipografía Corporativa</h2>
+      <p class="section-desc brand-body">
+        Definimos un sistema tipográfico de alto rendimiento digital.
+        <strong>Orbitron</strong> para títulos robustos y de impronta tecnológica, e <strong>Inter</strong> para máxima legibilidad corporativa.
+      </p>
+      
+      <div class="typography-grid">
+        <div class="font-preview-box">
+          <div class="font-header">
+            <span class="font-family-name brand-title">Orbitron (Cabeceras)</span>
+            <span class="badge-beraxis badge-blue">Tech Titles</span>
+          </div>
+          <div class="font-abc" style="font-family: var(--font-title); font-weight: 700;">
+            A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+          </div>
+          <div class="font-tester-wrapper">
+            <input type="text" id="orbitron-test-input" class="font-test-input" value="BERAXIS: CORE SYSTEMS AND PLATFORMS" style="font-family: var(--font-title);">
+          </div>
+        </div>
+        
+        <div class="font-preview-box">
+          <div class="font-header">
+            <span class="font-family-name brand-body" style="font-weight: 700;">Inter (Cuerpo &amp; Datos)</span>
+            <span class="badge-beraxis badge-green">Highly Readable</span>
+          </div>
+          <div class="font-abc" style="font-family: var(--font-body);">
+            a b c d e f g h i j k l m n o p q r s t u v w x y z
+          </div>
+          <div class="font-tester-wrapper">
+            <input type="text" id="inter-test-input" class="font-test-input" value="Sistemas core transaccionales y firma digital." style="font-family: var(--font-body);">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand Assets Section (Downloads) -->
+    <section id="brand-assets" class="section-container">
+      <h2 class="section-title brand-title">Recursos de Marca Oficiales</h2>
+      <p class="section-desc brand-body">
+        Accede y descarga todos los formatos vectoriales y rasterizados de alta resolución listos para registrar la marca en ONAPI, uso web o impresión.
+      </p>
+
+      <div class="assets-download-grid">
+        <!-- Asset 1: Isotipo -->
+        <div class="asset-card">
+          <div class="asset-preview border-preview bg-transparent-grid">
+            <img src="assets/isotipo.svg" alt="Isotipo Beraxis" class="asset-preview-img">
+          </div>
+          <h4 class="brand-title">Isotipo Oficial (Símbolo B)</h4>
+          <p class="brand-body text-xs">Ideal para favicons, iconos de perfil, avatares y botones flotantes.</p>
+          <div class="asset-actions">
+            <a href="assets/isotipo.svg" download class="btn-beraxis btn-beraxis-outline-green">SVG (Vector)</a>
+            <a href="assets/isotipo_512.png" download class="btn-beraxis btn-beraxis-secondary">PNG (Raster)</a>
+          </div>
+        </div>
+
+        <!-- Asset 2: Logo Principal Horizontal -->
+        <div class="asset-card">
+          <div class="asset-preview border-preview bg-transparent-grid">
+            <img src="assets/logo_principal.svg" alt="Logo Principal Horizontal" class="asset-preview-img" style="max-height: 50px;">
+          </div>
+          <h4 class="brand-title">Logotipo Principal (Horizontal)</h4>
+          <p class="brand-body text-xs">El logotipo oficial principal en colores primarios para encabezados claros.</p>
+          <div class="asset-actions">
+            <a href="assets/logo_principal.svg" download class="btn-beraxis btn-beraxis-outline-green">SVG (Vector)</a>
+            <a href="assets/logo_principal.png" download class="btn-beraxis btn-beraxis-secondary">PNG (Raster)</a>
+          </div>
+        </div>
+
+        <!-- Asset 3: Logo Vertical -->
+        <div class="asset-card">
+          <div class="asset-preview border-preview bg-transparent-grid">
+            <img src="assets/logo_vertical.svg" alt="Logo Vertical" class="asset-preview-img" style="max-height: 100px;">
+          </div>
+          <h4 class="brand-title">Logotipo Centrado (Vertical)</h4>
+          <p class="brand-body text-xs">Variación vertical para membretes, portadas de propuestas o facturas.</p>
+          <div class="asset-actions">
+            <a href="assets/logo_vertical.svg" download class="btn-beraxis btn-beraxis-outline-green">SVG (Vector)</a>
+            <a href="assets/logo_vertical.png" download class="btn-beraxis btn-beraxis-secondary">PNG (Raster)</a>
+          </div>
+        </div>
+
+        <!-- Asset 4: Logo Negativo -->
+        <div class="asset-card dark-card-bg">
+          <div class="asset-preview border-preview bg-dark-solid">
+            <img src="assets/logo_negativo.svg" alt="Logo Negativo" class="asset-preview-img" style="max-height: 50px;">
+          </div>
+          <h4 class="brand-title text-white">Logotipo Negativo</h4>
+          <p class="brand-body text-muted text-xs">Texto blanco para destacar en fondos oscuros u operaciones de modo noche.</p>
+          <div class="asset-actions">
+            <a href="assets/logo_negativo.svg" download class="btn-beraxis btn-beraxis-outline-green">SVG (Vector)</a>
+            <a href="assets/logo_negativo.png" download class="btn-beraxis btn-beraxis-secondary">PNG (Raster)</a>
+          </div>
+        </div>
+
+        <!-- Asset 5: Monocromatico Blanco -->
+        <div class="asset-card dark-card-bg">
+          <div class="asset-preview border-preview bg-green-solid">
+            <img src="assets/logo_monocromatico_blanco.svg" alt="Logo Monocromatico Blanco" class="asset-preview-img" style="max-height: 50px;">
+          </div>
+          <h4 class="brand-title text-white">Monocromático Blanco</h4>
+          <p class="brand-body text-muted text-xs">Completamente blanco para superponer sobre imágenes complejas o banners.</p>
+          <div class="asset-actions">
+            <a href="assets/logo_monocromatico_blanco.svg" download class="btn-beraxis btn-beraxis-outline-green">SVG (Vector)</a>
+            <a href="assets/logo_monocromatico_blanco.png" download class="btn-beraxis btn-beraxis-secondary">PNG (Raster)</a>
+          </div>
+        </div>
+
+        <!-- Asset 6: Monocromatico Negro/Azul -->
+        <div class="asset-card">
+          <div class="asset-preview border-preview bg-transparent-grid">
+            <img src="assets/logo_monocromatico_negro.svg" alt="Logo Monocromatico Negro" class="asset-preview-img" style="max-height: 50px;">
+          </div>
+          <h4 class="brand-title">Monocromático Azul</h4>
+          <p class="brand-body text-xs">Versión plana a una sola tinta azul marina corporativa para impresiones sencillas.</p>
+          <div class="asset-actions">
+            <a href="assets/logo_monocromatico_negro.svg" download class="btn-beraxis btn-beraxis-outline-green">SVG (Vector)</a>
+            <a href="assets/logo_monocromatico_negro.png" download class="btn-beraxis btn-beraxis-secondary">PNG (Raster)</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Component Library Playground -->
+    <section id="ui-components" class="section-container">
+      <h2 class="section-title brand-title">Librería de Componentes UI</h2>
+      <p class="section-desc brand-body">
+        Implementa directamente el diseño de botones, etiquetas y tarjetas Beraxis en tu software o portal SaaS copiando el código asociado.
+      </p>
+
+      <div class="components-grid">
+        <!-- Interactive Buttons -->
+        <div class="component-box">
+          <h4 class="brand-title">Estilos de Botones</h4>
+          <div class="component-preview flex-wrap">
+            <button class="btn-beraxis btn-beraxis-primary">Botón Principal</button>
+            <button class="btn-beraxis btn-beraxis-secondary">Botón Secundario</button>
+            <button class="btn-beraxis btn-beraxis-accent">Acción Crítica</button>
+            <button class="btn-beraxis btn-beraxis-outline-green">Delineado Verde</button>
+          </div>
+          <div class="component-code">
+            <pre><code>&lt;button class="btn-beraxis btn-beraxis-primary"&gt;Botón Principal&lt;/button&gt;
+&lt;button class="btn-beraxis btn-beraxis-secondary"&gt;Botón Secundario&lt;/button&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Badges & Indicators -->
+        <div class="component-box">
+          <h4 class="brand-title">Etiquetas de Estado</h4>
+          <div class="component-preview flex-wrap">
+            <span class="badge-beraxis badge-blue">Sistemas Activos</span>
+            <span class="badge-beraxis badge-green">Conexión Core OK</span>
+            <span class="badge-beraxis badge-orange">Pendiente de Firma</span>
+          </div>
+          <div class="component-code">
+            <pre><code>&lt;span class="badge-beraxis badge-green"&gt;Conexión Core OK&lt;/span&gt;</code></pre>
+          </div>
+        </div>
+        
+        <!-- Banners/Callouts -->
+        <div class="component-box col-span-2">
+          <h4 class="brand-title">Panel de Notificación SaaS</h4>
+          <div class="component-preview">
+            <div class="callout-beraxis" style="width: 100%; margin: 0;">
+              <div class="callout-beraxis-title">CONEXIÓN CORE ESTABLECIDA</div>
+              <p class="brand-body" style="font-size: 0.9rem; margin: 0;">
+                El sistema de firma digital se ha integrado exitosamente con el core bancario cooperativo. Respuesta de servidor: 200 OK.
+              </p>
+            </div>
+          </div>
+          <div class="component-code">
+            <pre><code>&lt;div class="callout-beraxis"&gt;
+  &lt;div class="callout-beraxis-title"&gt;CONEXIÓN CORE ESTABLECIDA&lt;/div&gt;
+  &lt;p class="brand-body"&gt;El sistema de firma se ha integrado exitosamente.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mockup Previewer -->
+    <section id="mockups" class="section-container">
+      <h2 class="section-title brand-title">Maquetas de Identidad (Mockups)</h2>
+      <p class="section-desc brand-body">
+        Visualiza el logotipo de Beraxis aplicado en elementos de oficina corporativa y plataformas web SaaS.
+      </p>
+
+      <div class="mockups-grid">
+        <!-- Card 1: Business Card -->
+        <div class="mockup-item">
+          <h4 class="brand-title">Tarjetas de Presentación (Frente/Reverso)</h4>
+          <div class="card-scene">
+            <div class="card-3d" id="business-card-3d">
+              <!-- Front of the business card -->
+              <div class="card-face card-front">
+                <img src="assets/logo_vertical.svg" alt="Logo vertical blanco" class="card-logo-front" style="filter: brightness(0) invert(1);">
+              </div>
+              <!-- Back of the business card -->
+              <div class="card-face card-back">
+                <div class="card-back-header">
+                  <div class="card-back-name">Ing. José Buten</div>
+                  <div class="card-back-title">Consultor de Innovación &amp; CTO</div>
+                </div>
+                <div class="card-back-divider"></div>
+                <div class="card-back-details">
+                  <p><span>📧</span> jbuten@beraxis.com</p>
+                  <p><span>🌐</span> www.beraxis.com</p>
+                  <p><span>📍</span> Santo Domingo, República Dominicana</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="mockup-hint brand-body">Haz clic sobre la tarjeta para girarla en 3D.</p>
+        </div>
+
+        <!-- Card 2: Letterhead Paper -->
+        <div class="mockup-item">
+          <h4 class="brand-title">Papelería Corporativa</h4>
+          <div class="letterhead-preview">
+            <div class="letterhead-sheet">
+              <div class="letterhead-header">
+                <img src="assets/logo_principal.svg" alt="Beraxis Logo" style="height: 25px;">
+                <div class="letterhead-date">1 de Julio, 2026</div>
+              </div>
+              <div class="letterhead-bar"></div>
+              <div class="letterhead-body">
+                <p class="letter-recipient">A la Junta de Directores,</p>
+                <p class="letter-text">
+                  A través de esta propuesta técnica formalizamos la arquitectura de integración para el Core Financiero Cooperativo. El sistema integrará canales Web/Móviles utilizando nuestra pasarela de firma digital estructurada en Beraxis, asegurando la consistencia y el cumplimiento normativo exigido...
+                </p>
+                <div class="letterhead-signature">
+                  <div class="sig-line"></div>
+                  <p class="sig-name">José Buten</p>
+                  <p class="sig-title">Fundador, Beraxis</p>
+                </div>
+              </div>
+              <div class="letterhead-footer">
+                <p>Santo Domingo, R.D. | info@beraxis.com | www.beraxis.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Mobile App Icon -->
+        <div class="mockup-item">
+          <h4 class="brand-title">Acceso de Aplicación Móvil</h4>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="phone-status-bar">
+                <span>12:20 PM</span>
+                <span>🔋 100%</span>
+              </div>
+              <div class="phone-grid">
+                <!-- App icon white -->
+                <div class="phone-app">
+                  <div class="phone-app-icon" style="background-image: url('assets/app_icon_192.png');"></div>
+                  <span class="phone-app-label">Beraxis Lite</span>
+                </div>
+                <!-- App icon dark -->
+                <div class="phone-app">
+                  <div class="phone-app-icon" style="background-image: url('assets/app_icon_512.png');"></div>
+                  <span class="phone-app-label">Beraxis Core</span>
+                </div>
+                <!-- Standard apps -->
+                <div class="phone-app">
+                  <div class="phone-app-icon-standard">⚙️</div>
+                  <span class="phone-app-label">Ajustes</span>
+                </div>
+                <div class="phone-app">
+                  <div class="phone-app-icon-standard">💬</div>
+                  <span class="phone-app-label">Mensajes</span>
+                </div>
+              </div>
+              
+              <!-- Dock -->
+              <div class="phone-dock">
+                <div class="phone-app-icon-standard">📞</div>
+                <div class="phone-app-icon-standard">🌐</div>
+                <div class="phone-app-icon-standard">📧</div>
+                <div class="phone-app-icon" style="background-image: url('assets/app_icon_512.png');"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Web SaaS Header Preview -->
+        <div class="mockup-item">
+          <h4 class="brand-title">Plataforma SaaS en Operación</h4>
+          <div class="saas-preview">
+            <div class="saas-header">
+              <img src="assets/logo_principal.svg" alt="Beraxis Logo" style="height: 16px; filter: brightness(0) invert(1);">
+              <div class="saas-menu">
+                <span class="saas-menu-item active">Dashboard</span>
+                <span class="saas-menu-item">API Integrations</span>
+                <span class="saas-menu-item">Security logs</span>
+              </div>
+              <div class="saas-profile">JB</div>
+            </div>
+            <div class="saas-body">
+              <div class="saas-sidebar">
+                <div class="sb-item active">📊 Consola Core</div>
+                <div class="sb-item">🔑 Llaves API</div>
+                <div class="sb-item">📂 Firma Contratos</div>
+                <div class="sb-item">👤 Ajustes Cuenta</div>
+              </div>
+              <div class="saas-pane">
+                <div class="saas-pane-header">
+                  <h5 class="brand-title" style="margin: 0; font-size: 1.1rem;">Estado del Core Bancario</h5>
+                  <span class="badge-beraxis badge-green">Conexión Activa</span>
+                </div>
+                <div class="saas-metric-grid">
+                  <div class="saas-metric-card">
+                    <span class="metric-label">Firmas hoy</span>
+                    <span class="metric-value brand-title" style="color: var(--beraxis-green);">1,248</span>
+                  </div>
+                  <div class="saas-metric-card">
+                    <span class="metric-label">Latencia API</span>
+                    <span class="metric-value brand-title" style="color: var(--beraxis-orange);">14 ms</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="brand-footer">
+    <div class="footer-logo">
+      <img src="assets/logo_principal.svg" alt="Beraxis" style="height: 30px; filter: brightness(0) invert(1);">
+    </div>
+    <p class="brand-body">© 2026 Beraxis. Todos los derechos reservados. Diseñado para la formalización corporativa.</p>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Javascript -->
+  <script src="app.js"></script>
+</body>
+</html>

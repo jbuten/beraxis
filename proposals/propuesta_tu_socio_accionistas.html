@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tu Socio — Plan Tecnológico | Beraxis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue:        #0B2545;
+      --green:       #139A43;
+      --orange:      #F39200;
+      --white:       #FFFFFF;
+      --gray-light:  #F4F6F9;
+      --gray-text:   #4A5568;
+      --gray-border: #E2E8F0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: #1a202c;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* ── PRINT ── */
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        background: #fff;
+        color: #1a202c;
+      }
+      .cover {
+        height: 100vh;
+        max-height: 100vh;
+        page-break-after: always;
+        break-after: page;
+        box-sizing: border-box;
+      }
+      .page {
+        height: 100vh;
+        max-height: 100vh;
+        padding: 48px 56px;
+        max-width: 100% !important;
+        width: 100% !important;
+        page-break-after: always;
+        break-after: page;
+        box-sizing: border-box;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .closing {
+        height: 100vh;
+        max-height: 100vh;
+        page-break-after: always;
+        break-after: page;
+        box-sizing: border-box;
+      }
+      .print-break {
+        break-before: page;
+        page-break-before: always;
+      }
+    }
+
+    /* ── COVER ── */
+    .cover {
+      background: var(--blue);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px;
+    }
+
+    .cover-header { display: flex; align-items: center; gap: 16px; }
+
+    .cover-logo img { height: 52px; display: block; border-radius: 10px; }
+
+    .cover-brand {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--white);
+      font-size: 22px;
+      letter-spacing: 3px;
+    }
+
+    .cover-divider {
+      width: 60px;
+      height: 3px;
+      background: var(--orange);
+      margin: 60px 0 40px;
+    }
+
+    .cover-tag {
+      display: inline-block;
+      background: var(--green);
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+
+    .cover-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 42px;
+      color: var(--white);
+      letter-spacing: 4px;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .cover-subtitle {
+      font-size: 15px;
+      color: rgba(255,255,255,0.65);
+      font-weight: 300;
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .cover-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 24px;
+    }
+
+    .cover-footer-label { font-size: 11px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 1.5px; }
+    .cover-footer-date  { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+    /* ── PAGES ── */
+    .page {
+      padding: 56px 64px;
+      max-width: 960px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .page-body {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--blue);
+    }
+
+    .page-header-brand   { font-family: 'Orbitron', sans-serif; font-size: 11px; color: var(--blue); letter-spacing: 2px; }
+    .page-header-section { font-size: 11px; color: var(--gray-text); text-transform: uppercase; letter-spacing: 1.5px; }
+
+    /* ── SECTION ── */
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+
+    .section-text {
+      color: var(--gray-text);
+      margin-bottom: 28px;
+      line-height: 1.8;
+    }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight-box {
+      background: var(--gray-light);
+      border-left: 4px solid var(--orange);
+      padding: 18px 22px;
+      border-radius: 4px;
+      margin-bottom: 28px;
+    }
+
+    .highlight-box p { color: var(--blue); font-weight: 500; font-size: 13px; line-height: 1.7; }
+
+    /* ── GRIDS ── */
+    .cards-grid   { display: grid; grid-template-columns: 1fr 1fr;     gap: 14px; margin-bottom: 28px; }
+    .cards-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+
+    .card {
+      border: 1px solid var(--gray-border);
+      border-radius: 6px;
+      padding: 18px;
+    }
+
+    .card-icon  { font-size: 20px; margin-bottom: 8px; }
+    .card-title { font-weight: 700; color: var(--blue); font-size: 13px; margin-bottom: 5px; }
+    .card-text  { color: var(--gray-text); font-size: 12px; line-height: 1.6; }
+
+    .card-accent        { border-top: 3px solid var(--green); }
+    .card-accent-orange { border-top: 3px solid var(--orange); }
+
+    /* ── INFRA TABLE ── */
+    .infra-group       { margin-bottom: 24px; }
+    .infra-group-title {
+      font-size: 11px; font-weight: 700; color: var(--white);
+      background: var(--blue); text-transform: uppercase;
+      letter-spacing: 1.5px; padding: 8px 14px;
+      border-radius: 4px 4px 0 0;
+    }
+
+    .infra-list   { border: 1px solid var(--gray-border); border-top: none; border-radius: 0 0 4px 4px; overflow: hidden; }
+    .infra-item   { display: flex; align-items: flex-start; gap: 12px; padding: 11px 14px; border-bottom: 1px solid var(--gray-border); }
+    .infra-item:last-child   { border-bottom: none; }
+    .infra-item:nth-child(even) { background: var(--gray-light); }
+
+    .infra-dot        { width: 8px; height: 8px; border-radius: 50%; background: var(--green);  flex-shrink: 0; margin-top: 5px; }
+    .infra-dot-orange { background: var(--orange); }
+    .infra-dot-blue   { background: var(--blue); }
+
+    .infra-name { font-weight: 600; color: var(--blue); font-size: 12px; margin-bottom: 2px; }
+    .infra-desc { font-size: 11px; color: var(--gray-text); }
+
+    /* ── ROADMAP ── */
+    .roadmap-item    { display: flex; gap: 18px; margin-bottom: 18px; align-items: flex-start; }
+    .roadmap-marker  { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+
+    .roadmap-dot {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 13px; color: var(--white); flex-shrink: 0;
+    }
+
+    .roadmap-dot-green  { background: var(--green); }
+    .roadmap-dot-orange { background: var(--orange); }
+    .roadmap-line       { width: 2px; height: 22px; background: var(--gray-border); }
+
+    .roadmap-content  { flex: 1; padding-top: 5px; }
+    .roadmap-phase    { font-size: 10px; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px; }
+    .roadmap-title    { font-weight: 700; color: var(--blue); font-size: 13px; margin-bottom: 2px; }
+    .roadmap-date     { font-size: 11px; color: var(--gray-text); }
+
+    .mvp-badge {
+      display: inline-block;
+      background: var(--orange); color: var(--white);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 2px; margin-left: 8px;
+    }
+
+    /* ── PAGE FOOTER ── */
+    .page-footer {
+      margin-top: 40px; padding-top: 14px;
+      border-top: 1px solid var(--gray-border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    .page-footer-brand { font-family: 'Orbitron', sans-serif; font-size: 10px; color: var(--blue); letter-spacing: 2px; opacity: 0.5; }
+    .page-footer-text  { font-size: 10px; color: var(--gray-text); opacity: 0.6; }
+
+    /* ── CLOSING ── */
+    .closing {
+      background: var(--blue);
+      padding: 60px 64px;
+      min-height: 45vh;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    .closing-label  { font-size: 10px; font-weight: 600; color: var(--orange); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+    .closing-title  { font-family: 'Orbitron', sans-serif; font-size: 24px; color: var(--white); letter-spacing: 2px; margin-bottom: 24px; }
+    .closing-text   { color: rgba(255,255,255,0.6); font-size: 13px; max-width: 520px; line-height: 1.8; margin-bottom: 32px; }
+    .closing-contact       { font-size: 12px; color: rgba(255,255,255,0.5); }
+    .closing-contact strong { color: var(--white); display: block; font-size: 14px; margin-bottom: 4px; }
+
+    /* ── OPERATIONAL FLOW ── */
+    .op-flow {
+      display: flex;
+      align-items: stretch;
+      margin: 0 0 28px;
+      gap: 0;
+    }
+
+    .op-stage {
+      flex: 1;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--gray-border);
+    }
+
+    .op-header {
+      padding: 10px 10px 8px;
+      text-align: center;
+    }
+
+    .op-header-green  { background: var(--green); }
+    .op-header-orange { background: var(--orange); }
+    .op-header-blue   { background: var(--blue); }
+
+    .op-num  { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.65); letter-spacing: 1px; }
+    .op-name { font-size: 10px; font-weight: 700; color: #fff; letter-spacing: 0.5px; margin-top: 2px; line-height: 1.3; }
+
+    .op-body {
+      padding: 10px 10px;
+      background: var(--gray-light);
+      height: calc(100% - 54px);
+    }
+
+    .op-item {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 7px;
+      align-items: flex-start;
+    }
+
+    .op-item:last-child { margin-bottom: 0; }
+
+    .op-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .op-item-text { font-size: 10px; color: var(--blue); line-height: 1.4; }
+
+    .op-arrow-wrap {
+      display: flex;
+      align-items: center;
+      padding: 0 4px;
+      flex-shrink: 0;
+    }
+
+    .op-arrow-svg { width: 18px; height: 18px; }
+
+    /* ── SWIMLANE ── */
+    .swimlane {
+      border: 1px solid var(--gray-border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .swimlane-header {
+      display: grid;
+      grid-template-columns: 140px 1fr 1fr 1fr;
+      background: var(--blue);
+    }
+
+    .swimlane-col-title {
+      padding: 8px 12px;
+      font-size: 9px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.85);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .swimlane-col-title:last-child { border-right: none; }
+
+    .swimlane-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 1fr 1fr;
+      border-top: 1px solid var(--gray-border);
+    }
+
+    .swimlane-row:nth-child(even) { background: var(--gray-light); }
+
+    .swimlane-cell {
+      padding: 10px 12px;
+      border-right: 1px solid var(--gray-border);
+      vertical-align: top;
+      font-size: 11px;
+    }
+
+    .swimlane-cell:last-child { border-right: none; }
+
+    .swimlane-stage-label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--white);
+      padding: 4px 10px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    .swimlane-cell-text { font-size: 11px; color: var(--gray-text); line-height: 1.5; }
+    .swimlane-cell-text strong { color: var(--blue); display: block; font-size: 11px; margin-bottom: 2px; }
+
+    .tag-green  { background: var(--green); }
+    .tag-orange { background: var(--orange); }
+    .tag-blue   { background: var(--blue); border: 1px solid rgba(255,255,255,0.2); }
+    .tag-gray   { background: var(--gray-text); }
+
+    /* ── COST TABLE ── */
+    .cost-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 12px;
+    }
+
+    .cost-table thead tr {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .cost-table thead th {
+      padding: 9px 12px;
+      text-align: left;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+    }
+
+    .cost-table thead th:last-child { text-align: right; }
+
+    .cost-table tbody tr { border-bottom: 1px solid var(--gray-border); }
+    .cost-table tbody tr:nth-child(even) { background: var(--gray-light); }
+
+    .cost-table tbody td {
+      padding: 9px 12px;
+      color: var(--gray-text);
+      vertical-align: top;
+    }
+
+    .cost-table tbody td:first-child {
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    .cost-table tbody td:last-child {
+      text-align: right;
+      font-weight: 600;
+      color: var(--blue);
+      white-space: nowrap;
+    }
+
+    .cost-subtotal td {
+      background: var(--gray-light) !important;
+      font-weight: 700 !important;
+      color: var(--blue) !important;
+      border-top: 2px solid var(--blue) !important;
+      font-size: 12px;
+    }
+
+    .cost-category-header {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 6px 12px;
+      border-radius: 3px 3px 0 0;
+      display: block;
+      margin-top: 16px;
+      margin-bottom: 0;
+    }
+
+    .cat-green  { background: var(--green); }
+    .cat-orange { background: var(--orange); }
+    .cat-blue   { background: var(--blue); }
+    .cat-gray   { background: var(--gray-text); }
+
+    .cost-total-box {
+      background: var(--blue);
+      border-radius: 6px;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0 16px;
+    }
+
+    .cost-total-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.65);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .cost-total-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      color: var(--white);
+      letter-spacing: 1px;
+    }
+
+    .cost-total-sub {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
+      text-align: right;
+    }
+
+    .cost-note {
+      font-size: 10.5px;
+      color: var(--gray-text);
+      line-height: 1.7;
+      border-left: 3px solid var(--orange);
+      padding: 10px 14px;
+      background: var(--gray-light);
+      border-radius: 0 4px 4px 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+     PORTADA
+════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-header">
+    <div class="cover-logo"><img src="assets/app_icon_white.png" alt="Beraxis" /></div>
+    <div class="cover-brand">BERAXIS</div>
+  </div>
+
+  <div>
+    <div class="cover-divider"></div>
+    <div class="cover-tag">Plan Tecnológico — Confidencial</div>
+    <div class="cover-title">TU SOCIO</div>
+    <div class="cover-subtitle">
+      Plataforma de crédito digital para operaciones B2B2C.<br/>
+      Infraestructura, arquitectura y hoja de ruta para la operación tecnológica del producto.
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <div>
+      <div class="cover-footer-label">Preparado por Beraxis</div>
+      <div class="cover-footer-date">Julio 2026</div>
+    </div>
+    <div class="cover-footer-label" style="text-align:right;">
+      Documento reservado para accionistas<br/>
+      <span style="color:rgba(255,255,255,0.3);">beraxis.com</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     PÁGINA 1 — CONTEXTO Y OBJETIVO
+════════════════════════════════════ -->
+<div class="page print-break">
+  <div class="page-header">
+    <div class="page-header-brand">BERAXIS</div>
+    <div class="page-header-section">Contexto del Proyecto</div>
+  </div>
+  <div class="page-body">
+    <div class="section-label">Origen</div>
+    <div class="section-title">Qué es Tu Socio</div>
+    <div class="section-text">
+      <strong>Tu Socio</strong> es una plataforma de crédito digital diseñada para operar en el ecosistema de distribución mayorista. Permite a comercios y compradores acceder a financiamiento ágil, gestionado completamente en línea, con trazabilidad financiera total y experiencia moderna tanto para el cliente como para el equipo operativo.
+    </div>
+
+    <div class="highlight-box">
+      <p>
+        La plataforma nace como evolución de un producto con cartera activa demostrada. Los clientes existentes serán migrados de forma ordenada al nuevo sistema, firmando un nuevo contrato bajo la nueva empresa, sin interrumpir operaciones en ningún momento del proceso.
+      </p>
+    </div>
+
+    <div class="section-label">Objetivo Tecnológico</div>
+    <div class="section-title">Qué se está construyendo</div>
+
+    <div class="cards-grid">
+      <div class="card card-accent">
+        <div class="card-icon">🏦</div>
+        <div class="card-title">Plataforma de Crédito Digital</div>
+        <div class="card-text">Sistema completo para originar, gestionar y cobrar créditos con trazabilidad financiera total, auditoría y cumplimiento desde el primer día.</div>
+      </div>
+      <div class="card card-accent">
+        <div class="card-icon">📱</div>
+        <div class="card-title">App Móvil para Clientes</div>
+        <div class="card-text">Aplicación iOS y Android para consultar estado de cuenta, historial de pagos, cuotas próximas y comunicarse con el equipo de cobro.</div>
+      </div>
+      <div class="card card-accent-orange">
+        <div class="card-icon">🖥️</div>
+        <div class="card-title">Backoffice Operativo</div>
+        <div class="card-text">Panel web para el equipo interno: gestión de clientes, originación de créditos, registro de pagos, conciliación y reportes ejecutivos.</div>
+      </div>
+      <div class="card card-accent-orange">
+        <div class="card-icon">⚙️</div>
+        <div class="card-title">Automatización de Procesos</div>
+        <div class="card-text">Notificaciones automáticas de vencimiento, recordatorios de pago por WhatsApp y procesos internos que reducen la carga operativa manual.</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-brand">BERAXIS</div>
+    <div class="page-footer-text">Resumen Ejecutivo · beraxis.com</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     PÁGINA 2 — DIAGRAMA DE ARQUITECTURA
+════════════════════════════════════ -->
+<div class="page print-break">
+  <div class="page-header">
+    <div class="page-header-brand">BERAXIS</div>
+    <div class="page-header-section">Arquitectura del Sistema</div>
+  </div>
+  <div class="page-body">
+    <div class="section-label">Visión General</div>
+    <div class="section-title">Arquitectura de Tu Socio</div>
+    <div class="section-text" style="margin-bottom:20px;">
+      El sistema opera sobre una arquitectura por capas: acceso seguro desde la app y el backoffice, núcleo de procesamiento distribuido, datos persistentes con respaldo, e integraciones externas especializadas.
+    </div>
+
+    <!-- SVG DIAGRAM -->
+    <svg viewBox="0 0 780 430" xmlns="http://www.w3.org/2000/svg"
+         style="width:100%;display:block;margin:0 auto 24px;font-family:'Inter',sans-serif;">
+
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5"
+                markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M0,1 L9,5 L0,9 Z" fill="#94A3B8"/>
+        </marker>
+      </defs>
+
+      <!-- ── CAPA 1: CLIENTES ── -->
+      <rect x="1" y="1" width="778" height="78" rx="5" fill="#F0F7F4" stroke="#139A43" stroke-width="1.2"/>
+      <text x="14" y="17" font-size="8" font-weight="700" fill="#139A43" letter-spacing="1.5" text-transform="uppercase">CAPA 1 · CLIENTES</text>
+
+      <!-- App Móvil -->
+      <rect x="140" y="22" width="190" height="46" rx="4" fill="#0B2545"/>
+      <text x="235" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">App Móvil</text>
+      <text x="235" y="58" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.6)">Flutter · iOS / Android</text>
+
+      <!-- Backoffice Web -->
+      <rect x="450" y="22" width="190" height="46" rx="4" fill="#0B2545"/>
+      <text x="545" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">Backoffice Web</text>
+      <text x="545" y="58" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.6)">React · Vite · TypeScript</text>
+
+      <!-- Arrows down -->
+      <line x1="235" y1="80" x2="235" y2="103" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="545" y1="80" x2="545" y2="103" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- ── CAPA 2: SEGURIDAD ── -->
+      <rect x="1" y="106" width="778" height="66" rx="5" fill="#FFF8EE" stroke="#F39200" stroke-width="1.2"/>
+      <text x="14" y="121" font-size="8" font-weight="700" fill="#F39200" letter-spacing="1.5">CAPA 2 · SEGURIDAD PERIMETRAL</text>
+
+      <rect x="100" y="130" width="198" height="32" rx="4" fill="#FFFFFF" stroke="#F39200" stroke-width="1.5"/>
+      <text x="199" y="145" text-anchor="middle" font-size="10" font-weight="600" fill="#0B2545">Cloudflare</text>
+      <text x="199" y="157" text-anchor="middle" font-size="8.5" fill="#4A5568">CDN · WAF · Protección DDoS</text>
+
+      <rect x="482" y="130" width="198" height="32" rx="4" fill="#FFFFFF" stroke="#F39200" stroke-width="1.5"/>
+      <text x="581" y="145" text-anchor="middle" font-size="10" font-weight="600" fill="#0B2545">Nginx Proxy</text>
+      <text x="581" y="157" text-anchor="middle" font-size="8.5" fill="#4A5568">SSL · Enrutamiento · Balanceo</text>
+
+      <!-- Arrows down -->
+      <line x1="390" y1="172" x2="390" y2="196" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- ── CAPA 3: NÚCLEO ── -->
+      <rect x="1" y="199" width="778" height="72" rx="5" fill="#EEF3FA" stroke="#0B2545" stroke-width="1.2" stroke-opacity="0.4"/>
+      <text x="14" y="215" font-size="8" font-weight="700" fill="#0B2545" letter-spacing="1.5">CAPA 3 · NÚCLEO DEL SISTEMA</text>
+
+      <rect x="40" y="222" width="200" height="38" rx="4" fill="#0B2545"/>
+      <text x="140" y="239" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">Backend API</text>
+      <text x="140" y="253" text-anchor="middle" font-size="8.5" fill="rgba(255,255,255,0.6)">FastAPI · Python · Pydantic v2</text>
+
+      <rect x="290" y="222" width="200" height="38" rx="4" fill="#0B2545"/>
+      <text x="390" y="239" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">Workers</text>
+      <text x="390" y="253" text-anchor="middle" font-size="8.5" fill="rgba(255,255,255,0.6)">Procesos async · Tareas programadas</text>
+
+      <rect x="540" y="222" width="200" height="38" rx="4" fill="#0B2545"/>
+      <text x="640" y="239" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">Automatización (n8n)</text>
+      <text x="640" y="253" text-anchor="middle" font-size="8.5" fill="rgba(255,255,255,0.6)">Flujos · Alertas · Notificaciones</text>
+
+      <!-- Arrows down to layer 4 -->
+      <line x1="220" y1="271" x2="220" y2="293" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="640" y1="271" x2="640" y2="293" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- ── CAPA 4A: DATOS ── -->
+      <rect x="1" y="296" width="370" height="128" rx="5" fill="#F4F6F9" stroke="#139A43" stroke-width="1.2"/>
+      <text x="14" y="312" font-size="8" font-weight="700" fill="#139A43" letter-spacing="1.5">CAPA 4 · DATOS</text>
+
+      <rect x="14" y="320" width="160" height="34" rx="4" fill="#FFFFFF" stroke="#139A43" stroke-width="1.3"/>
+      <text x="94" y="336" text-anchor="middle" font-size="10" font-weight="600" fill="#0B2545">PostgreSQL</text>
+      <text x="94" y="348" text-anchor="middle" font-size="8.5" fill="#4A5568">Base de datos principal</text>
+
+      <rect x="196" y="320" width="160" height="34" rx="4" fill="#FFFFFF" stroke="#139A43" stroke-width="1.3"/>
+      <text x="276" y="336" text-anchor="middle" font-size="10" font-weight="600" fill="#0B2545">Réplica + Backup</text>
+      <text x="276" y="348" text-anchor="middle" font-size="8.5" fill="#4A5568">Alta disponibilidad · 30 días</text>
+
+      <rect x="14" y="368" width="342" height="34" rx="4" fill="#FFFFFF" stroke="#139A43" stroke-width="1.3"/>
+      <text x="185" y="384" text-anchor="middle" font-size="10" font-weight="600" fill="#0B2545">Almacenamiento de Archivos</text>
+      <text x="185" y="396" text-anchor="middle" font-size="8.5" fill="#4A5568">KYC · Contratos · Comprobantes</text>
+
+      <!-- ── CAPA 4B: INTEGRACIONES ── -->
+      <rect x="409" y="296" width="370" height="128" rx="5" fill="#FFF8EE" stroke="#F39200" stroke-width="1.2"/>
+      <text x="422" y="312" font-size="8" font-weight="700" fill="#F39200" letter-spacing="1.5">CAPA 4 · INTEGRACIONES EXTERNAS</text>
+
+      <rect x="422" y="320" width="160" height="34" rx="4" fill="#FFFFFF" stroke="#F39200" stroke-width="1.3"/>
+      <text x="502" y="336" text-anchor="middle" font-size="10" font-weight="600" fill="#0B2545">Equifax Dominicana</text>
+      <text x="502" y="348" text-anchor="middle" font-size="8.5" fill="#4A5568">Buró de Crédito</text>
+
+      <rect x="602" y="320" width="160" height="34" rx="4" fill="#FFFFFF" stroke="#F39200" stroke-width="1.3"/>
+      <text x="682" y="336" text-anchor="middle" font-size="10" font-weight="600" fill="#0B2545">MetaMap</text>
+      <text x="682" y="348" text-anchor="middle" font-size="8.5" fill="#4A5568">KYC · Verificación de Identidad</text>
+
+      <rect x="422" y="368" width="160" height="34" rx="4" fill="#FFFFFF" stroke="#F39200" stroke-width="1.3"/>
+      <text x="502" y="384" text-anchor="middle" font-size="10" font-weight="600" fill="#0B2545">WhatsApp Business</text>
+      <text x="502" y="396" text-anchor="middle" font-size="8.5" fill="#4A5568">Comunicación con clientes</text>
+
+      <rect x="602" y="368" width="160" height="34" rx="4" fill="#FFFFFF" stroke="#F39200" stroke-width="1.3"/>
+      <text x="682" y="384" text-anchor="middle" font-size="10" font-weight="600" fill="#0B2545">Correo Transaccional</text>
+      <text x="682" y="396" text-anchor="middle" font-size="8.5" fill="#4A5568">Notificaciones automáticas</text>
+
+    </svg>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-brand">BERAXIS</div>
+    <div class="page-footer-text">Resumen Ejecutivo · beraxis.com</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     PÁGINA 3 — INFRAESTRUCTURA SERVIDORES
+════════════════════════════════════ -->
+<div class="page print-break">
+  <div class="page-header">
+    <div class="page-header-brand">BERAXIS</div>
+    <div class="page-header-section">Infraestructura del Sistema</div>
+  </div>
+
+  <div class="section-label">Componentes Tecnológicos</div>
+  <div class="section-title">Infraestructura requerida para operar Tu Socio</div>
+  <div class="section-text">
+    La operación segura, estable y escalable de Tu Socio requiere una infraestructura distribuida en múltiples componentes. Cada servidor, servicio e integración cumple una función específica e irremplazable dentro del ecosistema.
+  </div>
+
+  <div class="infra-group">
+    <div class="infra-group-title">Google Cloud Platform — Servidores y Cómputo</div>
+    <div class="infra-list">
+      <div class="infra-item">
+        <div class="infra-dot"></div>
+        <div>
+          <div class="infra-name">Base de Datos — Producción · Cloud SQL for PostgreSQL</div>
+          <div class="infra-desc">Instancia administrada Cloud SQL (db-custom-4-8192) — almacena toda la información financiera: clientes, créditos, cuotas, pagos y auditoría con integridad transaccional.</div>
+        </div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-dot"></div>
+        <div>
+          <div class="infra-name">Base de Datos — Réplica y Backup · Cloud SQL Read Replica</div>
+          <div class="infra-desc">Réplica administrada en tiempo real para alta disponibilidad. Backups automáticos diarios cifrados con retención de 30 días gestionados por GCP.</div>
+        </div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-dot"></div>
+        <div>
+          <div class="infra-name">Backend — API Principal · Compute Engine e2-standard-4</div>
+          <div class="infra-desc">VM de cómputo optimizado en GCP. Motor principal del sistema: créditos, pagos, autenticación, reglas financieras e integraciones externas.</div>
+        </div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-dot"></div>
+        <div>
+          <div class="infra-name">Frontend — Backoffice Web · Compute Engine e2-standard-2</div>
+          <div class="infra-desc">VM en GCP sirviendo el panel de control operativo en React: gestión de clientes, originación, cobros, conciliación y reportes.</div>
+        </div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-dot"></div>
+        <div>
+          <div class="infra-name">Workers — Procesamiento Asíncrono · Compute Engine e2-standard-2</div>
+          <div class="infra-desc">VM dedicada a tareas en segundo plano: cálculo de mora, cierre de cuotas, reportes automáticos, recordatorios y reconciliaciones periódicas.</div>
+        </div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-dot"></div>
+        <div>
+          <div class="infra-name">Automatización n8n · Compute Engine e2-standard-2</div>
+          <div class="infra-desc">VM en GCP para orquestación de flujos: notificaciones, alertas operativas, disparadores de eventos e integraciones entre servicios.</div>
+        </div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-dot"></div>
+        <div>
+          <div class="infra-name">Comunicación — WhatsApp Business API · Compute Engine e2-medium</div>
+          <div class="infra-desc">VM en GCP para gestión de mensajería con clientes: recordatorios de pago, confirmaciones de cuota, alertas de mora y soporte automatizado.</div>
+        </div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-dot"></div>
+        <div>
+          <div class="infra-name">Almacenamiento de Archivos · Google Cloud Storage</div>
+          <div class="infra-desc">Bucket Cloud Storage Standard (500 GB) para documentos KYC, contratos firmados, comprobantes de pago e identidades verificadas, con cifrado en reposo.</div>
+        </div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-dot"></div>
+        <div>
+          <div class="infra-name">Monitoreo y Observabilidad · Google Cloud Monitoring</div>
+          <div class="infra-desc">Cloud Monitoring + Cloud Logging para supervisión en tiempo real de todos los servicios, alertas automáticas ante incidentes y métricas de rendimiento.</div>
+        </div>
+      </div>
+      <div class="infra-item">
+        <div class="infra-dot"></div>
+        <div>
+          <div class="infra-name">Proxy y Balanceador · Cloud Load Balancing + Nginx</div>
+          <div class="infra-desc">Google Cloud Load Balancing con Nginx en Compute Engine: enrutamiento de tráfico, terminación SSL, seguridad perimetral y exposición controlada de servicios.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <div class="page-footer-brand">BERAXIS</div>
+    <div class="page-footer-text">Resumen Ejecutivo · beraxis.com</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     PÁGINA 4 — SERVICIOS E INTEGRACIONES
+════════════════════════════════════ -->
+<div class="page print-break">
+  <div class="page-header">
+    <div class="page-header-brand">BERAXIS</div>
+    <div class="page-header-section">Servicios e Integraciones</div>
+  </div>
+  <div class="page-body">
+    <div class="section-label">Conectividad</div>
+    <div class="section-title">Servicios e Integraciones Externas</div>
+    <div class="section-text" style="margin-bottom: 20px;">
+      La plataforma se conecta a servicios especializados para asegurar la verificación de usuarios, la evaluación de buró de crédito en tiempo real y el mantenimiento de canales de comunicación institucionales.
+    </div>
+
+    <div class="infra-group">
+      <div class="infra-group-title">Integraciones Externas</div>
+      <div class="infra-list">
+        <div class="infra-item">
+          <div class="infra-dot infra-dot-orange"></div>
+          <div>
+            <div class="infra-name">Equifax Dominicana — Buró de Crédito</div>
+            <div class="infra-desc">Consulta de historial crediticio en cada solicitud. El resultado se almacena como snapshot para auditoría, historial y cumplimiento regulatorio.</div>
+          </div>
+        </div>
+        <div class="infra-item">
+          <div class="infra-dot infra-dot-orange"></div>
+          <div>
+            <div class="infra-name">MetaMap — Verificación de Identidad (KYC)</div>
+            <div class="infra-desc">Verificación digital del cliente durante el proceso de alta: cédula, biometría facial y validación documental en tiempo real.</div>
+          </div>
+        </div>
+        <div class="infra-item">
+          <div class="infra-dot infra-dot-orange"></div>
+          <div>
+            <div class="infra-name">Pasarela de Pagos</div>
+            <div class="infra-desc">Procesamiento de pagos digitales: tarjetas, transferencias y billeteras electrónicas, con conciliación automática contra el sistema de cuotas.</div>
+          </div>
+        </div>
+        <div class="infra-item">
+          <div class="infra-dot infra-dot-orange"></div>
+          <div>
+            <div class="infra-name">Correo Transaccional</div>
+            <div class="infra-desc">Envío automatizado de notificaciones: bienvenida, confirmación de crédito, estados de cuenta, recordatorios de pago y alertas de vencimiento.</div>
+          </div>
+        </div>
+        <div class="infra-item">
+          <div class="infra-dot infra-dot-orange"></div>
+          <div>
+            <div class="infra-name">Envío de SMS — Notificaciones y Alertas</div>
+            <div class="infra-desc">Mensajes de texto para recordatorios de cuota, alertas de mora, códigos de verificación y notificaciones críticas a clientes sin acceso a WhatsApp o correo.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="infra-group" style="margin-top: 15px;">
+      <div class="infra-group-title">Identidad Digital y Comunicaciones</div>
+      <div class="infra-list">
+        <div class="infra-item">
+          <div class="infra-dot infra-dot-blue"></div>
+          <div>
+            <div class="infra-name">Dominio Principal y Subdominios</div>
+            <div class="infra-desc">Dominio corporativo + subdominios dedicados: api · app · admin · docs — cada servicio con su propio punto de acceso controlado.</div>
+          </div>
+        </div>
+        <div class="infra-item">
+          <div class="infra-dot infra-dot-blue"></div>
+          <div>
+            <div class="infra-name">Certificados SSL / TLS</div>
+            <div class="infra-desc">Cifrado HTTPS en todos los endpoints y subdominios. Renovación automática gestionada sin intervención manual.</div>
+          </div>
+        </div>
+        <div class="infra-item">
+          <div class="infra-dot infra-dot-blue"></div>
+          <div>
+            <div class="infra-name">CDN y Protección — Cloudflare</div>
+            <div class="infra-desc">Protección DDoS, enrutamiento global, caché de contenido estático y firewall de aplicaciones web (WAF) para todos los servicios expuestos.</div>
+          </div>
+        </div>
+        <div class="infra-item">
+          <div class="infra-dot infra-dot-blue"></div>
+          <div>
+            <div class="infra-name">Google Workspace — Correos y Colaboración</div>
+            <div class="infra-desc">Correos institucionales del equipo bajo el dominio corporativo. Suite de colaboración: Drive, Meet, Docs y Calendar para la operación interna.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-brand">BERAXIS</div>
+    <div class="page-footer-text">Resumen Ejecutivo · beraxis.com</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PÁGINA 4b — SEGURIDAD Y GOBERNANZA
+════════════════════════════════════ -->
+<div class="page print-break">
+  <div class="page-header">
+    <div class="page-header-brand">BERAXIS</div>
+    <div class="page-header-section">Seguridad y Gobernanza</div>
+  </div>
+  <div class="page-body">
+    <div class="section-label">Gobernanza</div>
+    <div class="section-title">Seguridad y Respaldo Técnico</div>
+    <div class="section-text" style="margin-bottom: 20px;">
+      Para garantizar la seguridad de la información financiera y la continuidad operativa, el sistema implementa políticas estrictas de control de versiones, despliegue automatizado y respaldo diario.
+    </div>
+
+    <div class="infra-group">
+      <div class="infra-group-title">Gestión, Seguridad y Gobernanza</div>
+      <div class="infra-list">
+        <div class="infra-item">
+          <div class="infra-dot"></div>
+          <div>
+            <div class="infra-name">Repositorio de Código — GitHub Privado</div>
+            <div class="infra-desc">Control de versiones, historial de cambios y protección de la propiedad intelectual del sistema. Acceso controlado por roles.</div>
+          </div>
+        </div>
+        <div class="infra-item">
+          <div class="infra-dot"></div>
+          <div>
+            <div class="infra-name">CI/CD — Despliegue Continuo</div>
+            <div class="infra-desc">Pipeline automatizado de validación y despliegue. Cada cambio aprobado se publica a producción con verificación previa en staging.</div>
+          </div>
+        </div>
+        <div class="infra-item">
+          <div class="infra-dot"></div>
+          <div>
+            <div class="infra-name">Gestión de Secretos y Ambientes</div>
+            <div class="infra-desc">Manejo seguro de credenciales y API keys por ambiente separado: desarrollo, staging y producción. Sin credenciales expuestas en código.</div>
+          </div>
+        </div>
+        <div class="infra-item">
+          <div class="infra-dot"></div>
+          <div>
+            <div class="infra-name">Auditoría y Trazabilidad</div>
+            <div class="infra-desc">Registro inmutable de cada acción crítica: quién, cuándo y qué cambió. Esencial para cumplimiento financiero y resolución de disputas.</div>
+          </div>
+        </div>
+        <div class="infra-item">
+          <div class="infra-dot"></div>
+          <div>
+            <div class="infra-name">Backups Automáticos y Plan de Recuperación</div>
+            <div class="infra-desc">Respaldos diarios cifrados con retención de 30 días. Procedimiento documentado y probado de restauración ante fallo crítico.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-brand">BERAXIS</div>
+    <div class="page-footer-text">Resumen Ejecutivo · beraxis.com</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     PÁGINA 5 — HOJA DE RUTA
+════════════════════════════════════ -->
+<div class="page print-break">
+  <div class="page-header">
+    <div class="page-header-brand">BERAXIS</div>
+    <div class="page-header-section">Hoja de Ruta</div>
+  </div>
+  <div class="page-body">
+    <div class="section-label">Roadmap</div>
+    <div class="section-title">Plan de Entrega — Junio a Septiembre 2026</div>
+    <div class="section-text">
+      El proyecto se estructura en cinco fases secuenciales con entregas concretas. Los trabajos de análisis, diseño e infraestructura inicial comenzaron en junio de 2026. La estimación está dimensionada para un equipo conformado por un <strong>Technology Lead</strong> y un <strong>desarrollador Full Stack</strong>, con soporte de herramientas de desarrollo asistido por inteligencia artificial.
+    </div>
+
+    <div class="roadmap">
+
+      <div class="roadmap-item">
+        <div class="roadmap-marker">
+          <div class="roadmap-dot">0</div>
+          <div class="roadmap-line"></div>
+        </div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase">Junio 2026 — Iniciado</div>
+          <div class="roadmap-title">Fundamentos e Infraestructura</div>
+          <div class="roadmap-date">Diseño del modelo de datos · Arquitectura · Google Cloud · Dominios · Repositorio · Ambientes · CI/CD</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-marker">
+          <div class="roadmap-dot">1</div>
+          <div class="roadmap-line"></div>
+        </div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase">Junio — Julio 2026</div>
+          <div class="roadmap-title">Core del Sistema — Backend API</div>
+          <div class="roadmap-date">Autenticación · RBAC · Clientes · KYC · Equifax · Créditos · Cuotas · Pagos · Conciliación · Auditoría</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-marker">
+          <div class="roadmap-dot roadmap-dot-green">2</div>
+          <div class="roadmap-line"></div>
+        </div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase">Julio — Agosto 2026</div>
+          <div class="roadmap-title">Backoffice Web Operativo</div>
+          <div class="roadmap-date">Dashboard · Gestión de clientes y créditos · Registro de pagos · Reportes de cartera · Informes ejecutivos</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-marker">
+          <div class="roadmap-dot">3</div>
+          <div class="roadmap-line"></div>
+        </div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase">Agosto 2026</div>
+          <div class="roadmap-title">Migración de Cartera</div>
+          <div class="roadmap-date">Traspaso ordenado cliente a cliente · Nuevo contrato · Validación de integridad · Cuadre de cartera · Sin interrupciones operativas</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-marker">
+          <div class="roadmap-dot roadmap-dot-orange">4</div>
+          <div class="roadmap-line"></div>
+        </div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase">Agosto — Septiembre 2026</div>
+          <div class="roadmap-title">App Móvil — iOS y Android</div>
+          <div class="roadmap-date">Estado de cuenta · Historial de pagos · Cuotas próximas · Notificaciones · Soporte al cliente</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-marker">
+          <div class="roadmap-dot roadmap-dot-green">✓</div>
+        </div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase">Septiembre 2026</div>
+          <div class="roadmap-title">MVP en Producción <span class="mvp-badge">MVP</span></div>
+          <div class="roadmap-date">Sistema completo operativo. Cartera migrada. Clientes activos en Tu Socio. Operación continua garantizada.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="highlight-box" style="margin-top: 15px; margin-bottom: 0;">
+      <p>
+        <strong>Equipo de desarrollo:</strong> La estimación contempla un CTO / Technology Lead y un desarrollador Full Stack, apoyados por herramientas de IA. · <strong>Principio de continuidad:</strong> La migración de cartera ocurre de forma individual por cliente, con validación de integridad en cada paso y plan de reversión documentado. En ningún momento se interrumpe la operatividad del negocio.
+      </p>
+    </div>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-brand">BERAXIS</div>
+    <div class="page-footer-text">Resumen Ejecutivo · beraxis.com</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     PÁGINA 6 — MODELO OPERATIVO
+════════════════════════════════════ -->
+<div class="page print-break">
+  <div class="page-header">
+    <div class="page-header-brand">BERAXIS</div>
+    <div class="page-header-section">Modelo Operativo</div>
+  </div>
+  <div class="page-body">
+    <div class="section-label">Ciclo del Crédito</div>
+    <div class="section-title">Flujo de Trabajo Operativo</div>
+    <div class="section-text" style="margin-bottom: 24px;">
+      El modelo operativo de Tu Socio integra al canal mayorista, la plataforma y el cliente en un flujo digital automatizado que cubre desde la incorporación inicial hasta la gestión activa de la cartera.
+    </div>
+
+    <!-- FLOW DIAGRAM: 5 stages -->
+    <div class="op-flow">
+
+      <div class="op-stage">
+        <div class="op-header op-header-blue">
+          <div class="op-num">ETAPA 01</div>
+          <div class="op-name">Incorporación</div>
+        </div>
+        <div class="op-body">
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--blue)"></div>
+            <div class="op-item-text">Canal refiere al cliente</div>
+          </div>
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--blue)"></div>
+            <div class="op-item-text">Alta en app o backoffice</div>
+          </div>
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--blue)"></div>
+            <div class="op-item-text">Captura de datos del negocio</div>
+          </div>
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--blue)"></div>
+            <div class="op-item-text">Solicitud de crédito iniciada</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-arrow-wrap">
+        <svg class="op-arrow-svg" viewBox="0 0 20 20"><path d="M4,10 L14,10 M10,5 L15,10 L10,15" stroke="#CBD5E0" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+      </div>
+
+      <div class="op-stage">
+        <div class="op-header op-header-orange">
+          <div class="op-num">ETAPA 02</div>
+          <div class="op-name">Verificación</div>
+        </div>
+        <div class="op-body">
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--orange)"></div>
+            <div class="op-item-text">KYC: cédula + selfie (MetaMap)</div>
+          </div>
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--orange)"></div>
+            <div class="op-item-text">Buró de crédito (Equifax RD)</div>
+          </div>
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--orange)"></div>
+            <div class="op-item-text">Análisis de riesgo</div>
+          </div>
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--orange)"></div>
+            <div class="op-item-text">Snapshot de datos auditables</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-arrow-wrap">
+        <svg class="op-arrow-svg" viewBox="0 0 20 20"><path d="M4,10 L14,10 M10,5 L15,10 L10,15" stroke="#CBD5E0" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+      </div>
+
+      <div class="op-stage">
+        <div class="op-header op-header-green">
+          <div class="op-num">ETAPA 03</div>
+          <div class="op-name">Originación</div>
+        </div>
+        <div class="op-body">
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--green)"></div>
+            <div class="op-item-text">Aprobación del crédito</div>
+          </div>
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--green)"></div>
+            <div class="op-item-text">Firma digital del contrato</div>
+          </div>
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--green)"></div>
+            <div class="op-item-text">Cuotas generadas automáticamente</div>
+          </div>
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--green)"></div>
+            <div class="op-item-text">Notificación de aprobación</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-arrow-wrap">
+        <svg class="op-arrow-svg" viewBox="0 0 20 20"><path d="M4,10 L14,10 M10,5 L15,10 L10,15" stroke="#CBD5E0" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+      </div>
+
+      <div class="op-stage">
+        <div class="op-header op-header-blue">
+          <div class="op-num">ETAPA 04</div>
+          <div class="op-name">Ciclo de Cuotas</div>
+        </div>
+        <div class="op-body">
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--blue)"></div>
+            <div class="op-item-text">Recordatorio por WhatsApp / email</div>
+          </div>
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--blue)"></div>
+            <div class="op-item-text">Pago registrado (app u operador)</div>
+          </div>
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--blue)"></div>
+            <div class="op-item-text">Conciliación automática</div>
+          </div>
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--blue)"></div>
+            <div class="op-item-text">Saldo actualizado en tiempo real</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="op-arrow-wrap">
+        <svg class="op-arrow-svg" viewBox="0 0 20 20"><path d="M4,10 L14,10 M10,5 L15,10 L10,15" stroke="#CBD5E0" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+      </div>
+
+      <div class="op-stage">
+        <div class="op-header op-header-orange">
+          <div class="op-num">ETAPA 05</div>
+          <div class="op-name">Gestión de Cartera</div>
+        </div>
+        <div class="op-body">
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--orange)"></div>
+            <div class="op-item-text">Monitoreo de mora por bucket</div>
+          </div>
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--orange)"></div>
+            <div class="op-item-text">Alertas automáticas de cobro</div>
+          </div>
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--orange)"></div>
+            <div class="op-item-text">Dashboard de riesgo en vivo</div>
+          </div>
+          <div class="op-item">
+            <div class="op-dot" style="background:var(--orange)"></div>
+            <div class="op-item-text">Reportes ejecutivos periódicos</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-brand">BERAXIS</div>
+    <div class="page-footer-text">Resumen Ejecutivo · beraxis.com</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PÁGINA 6b — MATRIZ DE RESPONSABILIDADES
+════════════════════════════════════ -->
+<div class="page print-break">
+  <div class="page-header">
+    <div class="page-header-brand">BERAXIS</div>
+    <div class="page-header-section">Modelo Operativo</div>
+  </div>
+  <div class="page-body">
+    <div class="section-label">Participantes</div>
+    <div class="section-title">Matriz de Responsabilidades por Etapa</div>
+    <div class="section-text" style="margin-bottom: 20px;">
+      Asignación clara de tareas y responsabilidades entre el distribuidor mayorista, el cliente y la plataforma automatizada durante el ciclo de vida del crédito.
+    </div>
+
+    <div class="swimlane" style="margin-bottom: 0;">
+      <div class="swimlane-header">
+        <div class="swimlane-col-title">Etapa</div>
+        <div class="swimlane-col-title">Canal Mayorista</div>
+        <div class="swimlane-col-title">Cliente</div>
+        <div class="swimlane-col-title">Plataforma Tu Socio</div>
+      </div>
+
+      <div class="swimlane-row">
+        <div class="swimlane-cell" style="display:flex;align-items:center;">
+          <span class="swimlane-stage-label tag-blue">01 · Incorporación</span>
+        </div>
+        <div class="swimlane-cell">
+          <div class="swimlane-cell-text">Refiere al cliente y facilita el proceso de alta en su punto de venta.</div>
+        </div>
+        <div class="swimlane-cell">
+          <div class="swimlane-cell-text">Descarga la app o es registrado por un operador. Completa sus datos.</div>
+        </div>
+        <div class="swimlane-cell">
+          <div class="swimlane-cell-text">Recibe la solicitud y registra al cliente en el sistema con estado inicial.</div>
+        </div>
+      </div>
+
+      <div class="swimlane-row">
+        <div class="swimlane-cell" style="display:flex;align-items:center;">
+          <span class="swimlane-stage-label tag-orange">02 · Verificación</span>
+        </div>
+        <div class="swimlane-cell">
+          <div class="swimlane-cell-text">—</div>
+        </div>
+        <div class="swimlane-cell">
+          <div class="swimlane-cell-text">Completa verificación de identidad con cédula y selfie desde la app.</div>
+        </div>
+        <div class="swimlane-cell">
+          <div class="swimlane-cell-text">Ejecuta KYC (MetaMap) y consulta de buró (Equifax). Guarda snapshot de resultados.</div>
+        </div>
+      </div>
+
+      <div class="swimlane-row">
+        <div class="swimlane-cell" style="display:flex;align-items:center;">
+          <span class="swimlane-stage-label tag-green">03 · Originación</span>
+        </div>
+        <div class="swimlane-cell">
+          <div class="swimlane-cell-text">—</div>
+        </div>
+        <div class="swimlane-cell">
+          <div class="swimlane-cell-text">Recibe notificación de aprobación. Firma el contrato digitalmente.</div>
+        </div>
+        <div class="swimlane-cell">
+          <div class="swimlane-cell-text">Aprueba el crédito, genera contrato, calcula tabla de amortización y crea las cuotas automáticamente.</div>
+        </div>
+      </div>
+
+      <div class="swimlane-row">
+        <div class="swimlane-cell" style="display:flex;align-items:center;">
+          <span class="swimlane-stage-label tag-blue">04 · Ciclo de Cuotas</span>
+        </div>
+        <div class="swimlane-cell">
+          <div class="swimlane-cell-text">Puede registrar pagos en efectivo desde el backoffice si aplica.</div>
+        </div>
+        <div class="swimlane-cell">
+          <div class="swimlane-cell-text">Recibe recordatorios y paga desde la app o en punto de pago autorizado.</div>
+        </div>
+        <div class="swimlane-cell">
+          <div class="swimlane-cell-text">Aplica el pago a la cuota, actualiza el saldo y ejecuta conciliación automática.</div>
+        </div>
+      </div>
+
+      <div class="swimlane-row">
+        <div class="swimlane-cell" style="display:flex;align-items:center;">
+          <span class="swimlane-stage-label tag-orange">05 · Gestión</span>
+        </div>
+        <div class="swimlane-cell">
+          <div class="swimlane-cell-text">Recibe alertas de clientes en mora para gestión en campo si es necesario.</div>
+        </div>
+        <div class="swimlane-cell">
+          <div class="swimlane-cell-text">Recibe alertas de vencimiento y mora. Puede consultar su estado en tiempo real.</div>
+        </div>
+        <div class="swimlane-cell">
+          <div class="swimlane-cell-text">Clasifica mora en 6 buckets de riesgo y genera reportes de cartera para accionistas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-brand">BERAXIS</div>
+    <div class="page-footer-text">Resumen Ejecutivo · beraxis.com</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     PÁGINA 7 — COSTOS DE INFRAESTRUCTURA
+════════════════════════════════════ -->
+<div class="page print-break">
+  <div class="page-header">
+    <div class="page-header-brand">BERAXIS</div>
+    <div class="page-header-section">Estimación de Costos</div>
+  </div>
+  <div class="page-body">
+    <div class="section-label">Inversión Mensual</div>
+    <div class="section-title">Costos de Servidores y Cómputo en la Nube</div>
+    <div class="section-text" style="margin-bottom:16px;">
+      La infraestructura del sistema se distribuye en servidores dedicados para cada capa de la aplicación, garantizando aislamiento, rendimiento óptimo y escalabilidad controlada.
+    </div>
+
+    <!-- CATEGORÍA 1: SERVIDORES -->
+    <span class="cost-category-header cat-blue">Google Cloud Platform — Servidores y Cómputo</span>
+    <table class="cost-table" style="margin-bottom: 0;">
+      <thead>
+        <tr>
+          <th style="width:38%">Componente</th>
+          <th>Especificación GCP</th>
+          <th style="width:16%">USD / mes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Base de Datos — Producción</td>
+          <td>Cloud SQL for PostgreSQL · db-custom-4-8192 · 100 GB SSD</td>
+          <td>$120</td>
+        </tr>
+        <tr>
+          <td>Base de Datos — Réplica y Backup</td>
+          <td>Cloud SQL Read Replica · alta disponibilidad · retención 30 días</td>
+          <td>$100</td>
+        </tr>
+        <tr>
+          <td>Servidor Backend — API</td>
+          <td>Compute Engine · e2-standard-4 · 4 vCPU · 16 GB RAM</td>
+          <td>$100</td>
+        </tr>
+        <tr>
+          <td>Servidor Frontend — Backoffice</td>
+          <td>Compute Engine · e2-standard-2 · 2 vCPU · 8 GB RAM</td>
+          <td>$60</td>
+        </tr>
+        <tr>
+          <td>Servidor Workers</td>
+          <td>Compute Engine · e2-standard-2 · procesamiento asíncrono</td>
+          <td>$80</td>
+        </tr>
+        <tr>
+          <td>Servidor Automatización — n8n</td>
+          <td>Compute Engine · e2-standard-2 · 2 vCPU · 8 GB RAM</td>
+          <td>$60</td>
+        </tr>
+        <tr>
+          <td>Servidor Comunicación — WhatsApp API</td>
+          <td>Compute Engine · e2-medium · 2 vCPU · 4 GB RAM</td>
+          <td>$50</td>
+        </tr>
+        <tr>
+          <td>Almacenamiento de Archivos</td>
+          <td>Cloud Storage · Standard · 500 GB · documentos KYC y contratos</td>
+          <td>$50</td>
+        </tr>
+        <tr>
+          <td>Monitoreo y Observabilidad</td>
+          <td>Cloud Monitoring + Logging · alertas y métricas en tiempo real</td>
+          <td>$40</td>
+        </tr>
+        <tr>
+          <td>Proxy / Balanceador</td>
+          <td>Cloud Load Balancing · SSL · enrutamiento · Nginx en Compute Engine</td>
+          <td>$40</td>
+        </tr>
+        <tr class="cost-subtotal">
+          <td colspan="2">Subtotal — Google Cloud Platform</td>
+          <td>$700</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-brand">BERAXIS</div>
+    <div class="page-footer-text">Resumen Ejecutivo · beraxis.com</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PÁGINA 7b — ESTIMACIÓN DE COSTOS DE SERVICIOS
+════════════════════════════════════ -->
+<div class="page print-break">
+  <div class="page-header">
+    <div class="page-header-brand">BERAXIS</div>
+    <div class="page-header-section">Estimación de Costos</div>
+  </div>
+  <div class="page-body">
+    <div class="section-label">Operación mensual</div>
+    <div class="section-title">Servicios Externos, Identidad y Gestión</div>
+    <div class="section-text" style="margin-bottom:12px;">
+      Estimación de costos mensuales correspondientes a integraciones con terceros, herramientas de colaboración del equipo operativo y plataformas de gestión del código.
+    </div>
+
+    <!-- CATEGORÍA 2: INTEGRACIONES -->
+    <span class="cost-category-header cat-orange">Servicios e Integraciones Externas</span>
+    <table class="cost-table" style="margin-bottom: 12px;">
+      <thead>
+        <tr>
+          <th style="width:38%">Servicio</th>
+          <th>Descripción</th>
+          <th style="width:16%">USD / mes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Equifax Dominicana</td>
+          <td>Consultas al buró de crédito · hasta 200 consultas / mes</td>
+          <td>$200</td>
+        </tr>
+        <tr>
+          <td>MetaMap — KYC</td>
+          <td>Verificaciones de identidad · hasta 150 verificaciones / mes</td>
+          <td>$200</td>
+        </tr>
+        <tr>
+          <td>WhatsApp Business API</td>
+          <td>Mensajes transaccionales, recordatorios y notificaciones de cobro</td>
+          <td>$150</td>
+        </tr>
+        <tr>
+          <td>Pasarela de Pagos</td>
+          <td>Fee mensual fijo + comisiones por transacción</td>
+          <td>$200</td>
+        </tr>
+        <tr>
+          <td>Correo Transaccional</td>
+          <td>Hasta 50,000 emails / mes · notificaciones automáticas</td>
+          <td>$80</td>
+        </tr>
+        <tr>
+          <td>Envío de SMS</td>
+          <td>Twilio / AWS SNS · recordatorios, alertas de mora y verificación · hasta 2,000 SMS / mes</td>
+          <td>$120</td>
+        </tr>
+        <tr class="cost-subtotal">
+          <td colspan="2">Subtotal — Integraciones</td>
+          <td>$950</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+      <div>
+        <!-- CATEGORÍA 3: IDENTIDAD Y COLABORACIÓN -->
+        <span class="cost-category-header cat-green">Identidad y Colaboración</span>
+        <table class="cost-table" style="margin-bottom: 0;">
+          <thead>
+            <tr>
+              <th>Servicio</th>
+              <th style="width:25%">USD/m</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cloudflare Business</td>
+              <td>$100</td>
+            </tr>
+            <tr>
+              <td>Google Workspace Business Standard · 10 usuarios · $12/u</td>
+              <td>$150</td>
+            </tr>
+            <tr>
+              <td>Antigravity Pro</td>
+              <td>$80</td>
+            </tr>
+            <tr>
+              <td>Dominios y renovación</td>
+              <td>$20</td>
+            </tr>
+            <tr class="cost-subtotal">
+              <td>Subtotal</td>
+              <td>$350</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <!-- CATEGORÍA 4: GESTIÓN -->
+        <span class="cost-category-header cat-gray">Gestión y Desarrollo</span>
+        <table class="cost-table" style="margin-bottom: 0;">
+          <thead>
+            <tr>
+              <th>Herramienta</th>
+              <th style="width:25%">USD/m</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GitHub Team &amp; CI/CD</td>
+              <td>$50</td>
+            </tr>
+            <tr>
+              <td>Backups Externos Cifrados</td>
+              <td>$50</td>
+            </tr>
+            <tr>
+              <td>Gestión de Proyectos / Docs</td>
+              <td>$50</td>
+            </tr>
+            <tr>
+              <td>Chatwoot — Soporte y Atención al Cliente</td>
+              <td>$120</td>
+            </tr>
+            <tr>
+              <td>ChatGPT Team — IA para Chatwoot</td>
+              <td>$80</td>
+            </tr>
+            <tr>
+              <td>Claude Code — Desarrollo asistido por IA</td>
+              <td>$120</td>
+            </tr>
+            <tr class="cost-subtotal">
+              <td>Subtotal</td>
+              <td>$470</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TOTAL BOX -->
+    <div class="cost-total-box" style="margin-top: 15px; margin-bottom: 0; padding: 14px 20px;">
+      <div>
+        <div class="cost-total-label">Costo Operativo Mensual Estimado</div>
+        <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:2px;">Servidores · Integraciones · Colaboración · Gestión</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="cost-total-value" style="font-size:18px;">~ $2,470 USD</div>
+        <div class="cost-total-sub" style="font-size:9.5px;margin-top:2px;">≈ RD$ 148,000 / mes</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-brand">BERAXIS</div>
+    <div class="page-footer-text">Resumen Ejecutivo · beraxis.com</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PÁGINA 7c — COSTOS DE IMPLEMENTACIÓN Y NOTAS
+════════════════════════════════════ -->
+<div class="page print-break">
+  <div class="page-header">
+    <div class="page-header-brand">BERAXIS</div>
+    <div class="page-header-section">Estimación de Costos</div>
+  </div>
+  <div class="page-body">
+    <div class="section-label">Inversión Inicial</div>
+    <div class="section-title">Costos de Implementación (Setup Inicial)</div>
+    <div class="section-text" style="margin-bottom:16px;">
+      Inversión única requerida para el setup de los diferentes ambientes (desarrollo, staging y producción), enrutamiento de red y enlace inicial con proveedores externos.
+    </div>
+
+    <!-- ONE-TIME COSTS -->
+    <span class="cost-category-header cat-blue">Costos de Implementación — Único (Setup Inicial)</span>
+    <table class="cost-table" style="margin-bottom:18px;">
+      <thead>
+        <tr>
+          <th style="width:38%">Concepto</th>
+          <th>Descripción</th>
+          <th style="width:16%">USD</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Configuración de Infraestructura</td>
+          <td>Setup de servidores, ambientes, redes y seguridad inicial</td>
+          <td>$800</td>
+        </tr>
+        <tr>
+          <td>Registro de Dominios</td>
+          <td>Registro del dominio principal + subdominios (primer año)</td>
+          <td>$150</td>
+        </tr>
+        <tr>
+          <td>Configuración de Integraciones</td>
+          <td>Alta y configuración de Equifax, MetaMap, WhatsApp, pasarela</td>
+          <td>$400</td>
+        </tr>
+        <tr>
+          <td>Licencias y Herramientas Iniciales</td>
+          <td>Suscripciones anuales, herramientas de desarrollo y seguridad</td>
+          <td>$350</td>
+        </tr>
+        <tr class="cost-subtotal">
+          <td colspan="2">Total Implementación (único)</td>
+          <td>$1,700</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="cost-note" style="margin-bottom: 0;">
+      <strong>Nota sobre estimaciones:</strong> Los valores presentados incluyen un margen de seguridad del 20–30% sobre precios de mercado actuales para absorber incrementos de precio, aumento de volumen operativo y nuevos componentes que se incorporen durante la evolución del producto. Los costos de integraciones externas (Equifax, MetaMap, pasarela) varían según el volumen real de transacciones y pueden ajustarse con los proveedores según el crecimiento de la cartera.
+    </div>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-brand">BERAXIS</div>
+    <div class="page-footer-text">Resumen ejecutivo · beraxis.com</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     CIERRE
+════════════════════════════════════ -->
+<div class="closing print-break">
+  <div class="closing-label">Beraxis — Technology &amp; Innovation</div>
+  <div class="closing-title">LISTOS PARA<br/>CONSTRUIRLO.</div>
+  <div class="closing-text">
+    Tu Socio es un producto viable, con una base de clientes existente y un canal comercial establecido. El plan de tecnología propuesta está diseñada para operar desde el primer día con seguridad, trazabilidad y escalabilidad. Este documento representa el alcance real del trabajo de ingeniería necesario para que la plataforma funcione correctamente.
+  </div>
+  <div class="closing-contact">
+    <strong>José Buten — Technology Lead</strong>
+    beraxis.com
+  </div>
+</div>
+
+</body>
+</html>
