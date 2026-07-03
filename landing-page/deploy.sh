@@ -17,7 +17,7 @@ print_info()    { echo -e "${YELLOW}ℹ $1${NC}"; }
 print_step()    { echo -e "${BLUE}▶ $1${NC}"; }
 
 SERVER_USER="jbuten"
-SERVER_HOST="beraxis-svr"
+SERVER_HOST="paymo-svr"
 REMOTE_BASE="/home/jbuten/docker/beraxis"
 REMOTE_SRC="$REMOTE_BASE/src"
 APP_DIR="$REMOTE_BASE/landing-page"
