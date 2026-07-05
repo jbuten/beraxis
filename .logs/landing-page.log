@@ -1,0 +1,16 @@
+[0;36m[1m[landing-page][0m 
+[0;36m[1m[landing-page][0m > landing-page@0.1.0 dev
+[0;36m[1m[landing-page][0m > next dev
+[0;36m[1m[landing-page][0m 
+[0;36m[1m[landing-page][0m ▲ Next.js 16.2.10 (Turbopack)
+[0;36m[1m[landing-page][0m - Local:         http://localhost:3000
+[0;36m[1m[landing-page][0m - Network:       http://192.168.100.222:3000
+[0;36m[1m[landing-page][0m ✓ Ready in 322ms
+[0;36m[1m[landing-page][0m 
+[0;36m[1m[landing-page][0m  GET / 200 in 242ms (next.js: 123ms, application-code: 118ms)
+[0;36m[1m[landing-page][0m ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+[0;36m[1m[landing-page][0m ▲ Next.js 16.2.10 (Turbopack)
+[0;36m[1m[landing-page][0m - Local:         http://localhost:3000
+[0;36m[1m[landing-page][0m - Network:       http://192.168.100.222:3000
+[0;36m[1m[landing-page][0m ✓ Ready in 395ms
+[0;36m[1m[landing-page][0m 

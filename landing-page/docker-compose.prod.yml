@@ -6,10 +6,10 @@ services:
     image: beraxis_landing:latest
     restart: always
     ports:
-      - "3700:3000"
+      - "3700:3700"
     environment:
       - NODE_ENV=production
-      - PORT=3000
+      - PORT=3700
     networks:
       - general_network
 

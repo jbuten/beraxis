@@ -74,7 +74,7 @@ export default function Home() {
           className="flex items-center gap-4 sm:gap-6"
         >
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/jose-buten-10567117/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-beraxis-gray/60 hover:text-beraxis-green transition-colors p-2 rounded-full hover:bg-white/[0.03]"
@@ -359,7 +359,7 @@ export default function Home() {
         
         <div className="flex gap-6">
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/jose-buten-10567117/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition-colors"
