@@ -38,7 +38,10 @@ export const metadata: Metadata = {
   authors: [{ name: "José Buten" }],
   metadataBase: new URL("https://beraxis.com"),
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
     shortcut: "/favicon.svg",
     apple: "/assets/app_icon_512.png",
   },

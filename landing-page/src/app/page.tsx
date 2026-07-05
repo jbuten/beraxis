@@ -291,7 +291,7 @@ export default function Home() {
           <div className="absolute inset-0 flex justify-center items-center pointer-events-none opacity-[0.02]">
             <div className="relative w-64 h-64 sm:w-96 sm:h-96">
               <Image
-                src="/assets/isotipo.svg"
+                src="/assets/isotipo_negativo.svg"
                 alt="Beraxis Isotipo Background"
                 fill
                 className="object-contain animate-float"

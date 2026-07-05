@@ -1,0 +1,10 @@
+[0;36m[1m[landing-page][0m 
+[0;36m[1m[landing-page][0m > landing-page@0.1.0 dev
+[0;36m[1m[landing-page][0m > next dev
+[0;36m[1m[landing-page][0m 
+[0;36m[1m[landing-page][0m ▲ Next.js 16.2.10 (Turbopack)
+[0;36m[1m[landing-page][0m - Local:         http://localhost:3700
+[0;36m[1m[landing-page][0m - Network:       http://192.168.100.222:3700
+[0;36m[1m[landing-page][0m ✓ Ready in 314ms
+[0;36m[1m[landing-page][0m 
+[0;36m[1m[landing-page][0m  GET / 200 in 295ms (next.js: 160ms, application-code: 135ms)
