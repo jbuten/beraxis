@@ -13,7 +13,8 @@ import {
   Mail, 
   MapPin, 
   ChevronRight,
-  ArrowDown
+  ArrowDown,
+  Phone
 } from "lucide-react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import Countdown from "@/components/Countdown";
@@ -328,7 +329,13 @@ export default function Home() {
                   <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-beraxis-green">
                     <Mail className="w-4 h-4" />
                   </div>
-                  <span>info@beraxis.com</span>
+                  <a href="mailto:info@beraxis.com" className="hover:text-white transition-colors">info@beraxis.com</a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-beraxis-green">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <a href="tel:8294709977" className="hover:text-white transition-colors">829-470-9977</a>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-beraxis-green">
