@@ -1,0 +1,175 @@
+
+
+
+De: Okelarys Sánchez - INTEC <okelarys.sanchez@intec.edu.do>
+Cc: "Arlette Montes de Oca - INTEC"<arlette.montesdeoca@intec.edu.do>, "Martire Ramírez - INTEC"<martire.ramirez@intec.edu.do>, "Carolina Frias - INTEC"<Carolina.frias@intec.edu.do>, "Geynys Lora - INTEC"<geynys.lora@intec.edu.do>
+Fecha: jue, 09 jul 2026 16:26:14 -0400
+Asunto: Solicitud de información (RFI) y demo Core/ERP para Cooperativa INTEC
+
+Buenas tardes estimados,
+
+ 
+
+Desde la dirección de la Cooperativa de Ahorros, Créditos y Servicios Múltiples de los empleados y profesores del Instituto Tecnológico de Santo Domingo, estamos en un proceso para
+ identificar alternativas tecnológicas para apoyar la transformación digital y el crecimiento de COOPINTEC. Como parte de este esfuerzo, estamos contactándolos para obtener información sobre su solución Core Bancario / ERP para Cooperativas.
+
+ 
+
+Nuestro interés es identificar una solución integral, moderna y escalable que permita optimizar los procesos operativos, comerciales, financieros y de gestión de riesgos de la cooperativa,
+ asegurando altos estándares de seguridad, eficiencia y automatización.
+
+ 
+
+Agradeceríamos la posibilidad de coordinar una demostración funcional de la plataforma, a ser coordinada en lo que resta del mes en curso. Y, asimismo, de manera preliminar nos
+ gustaría conocer si su solución contempla las siguientes capacidades:
+
+1. Gestión Integral de Socios y Clientes
+
+Expediente único del socio
+
+Administración de información personal, financiera y transaccional
+
+Segmentación de clientes y gestión de relaciones
+
+Cumplimiento de procesos KYC y debida diligencia
+
+ 
+
+2. Gestión Digital de Documentos y Solicitudes
+
+Repositorio documental centralizado
+
+Digitalización y almacenamiento de documentos
+
+Flujos de trabajo para aprobación de solicitudes
+
+Firma electrónica o integración con soluciones de firma digital
+
+Gestión de expedientes electrónicos
+
+ 
+
+3. Gestión de Productos y Operaciones Financieras
+
+Ahorros
+
+Aportaciones
+
+Préstamos y líneas de crédito
+
+Gestión de cobranzas
+
+Integración con canales electrónicos para transferencias y pagos
+
+Motor de reglas de negocio
+
+Automatización de procesos (workflows)
+
+ 
+
+4. Plataformas Digitales
+
+Portal web para socios
+
+Aplicaciones móviles para Android e iOS
+
+Portal de autoservicio
+
+Notificaciones por correo electrónico, SMS y/o WhatsApp
+
+ 
+
+5. Contabilidad y Finanzas
+
+Contabilidad integrada
+
+Catálogo contable configurable
+
+Estados financieros (automáticos preferiblemente)
+
+Presupuesto y control financiero
+
+Reportes regulatorios y de gestión
+
+Otros reportes y dashboards ejecutivos
+
+ 
+
+6. Gestión de Riesgos
+
+Nos interesa conocer las capacidades para:
+
+Riesgo de Crédito
+
+Riesgo de Liquidez
+
+Seguridad y Cumplimiento
+
+ 
+
+Información adicional solicitada
+
+Arquitectura tecnológica de la solución.
+
+Modalidad de implementación (nube, híbrida o local).
+
+Experiencia en cooperativas de ahorro y crédito.
+
+Referencias de clientes.
+
+Tiempo promedio de implementación.
+
+Esquema de soporte y mantenimiento.
+
+Modelo de licenciamiento y costos referenciales.
+
+Roadmap de evolución del producto.
+
+ 
+
+Agradecemos de antemano nos envíen acuse de recibido de este correo, para así saber que contaremos con su respuesta. Quedamos atentos.
+
+ 
+
+Cordialmente,
+
+ 
+
+Okelarys Sánchez Soto 
+
+Profesor por Asignatura - Área de Ingenierías 
+
+Instituto Tecnológico de Santo Domingo •  INTEC.
+
+Av. Los Próceres, Jardines del Norte.  P.O. Box 342-9 y 249-2
+
+Santo Domingo, República Dominicana.
+ Email: okelarys.sanchez@intec.edu.do / www.intec.edu.do
+
+
+ 
+
+ 
+ Este correo electrónico y cualquier archivo adjunto pueden contener información confidencial y privilegiada destinada únicamente para el destinatario designado. Si usted no es el destinatario
+ previsto o ha recibido este correo electrónico por error, le solicitamos que notifique al remitente de inmediato y elimine cualquier copia no autorizada de este correo electrónico y sus archivos adjuntos.
+
+La divulgación, reproducción, distribución o cualquier otro uso de esta información por personas o entidades distintas al destinatario designado está estrictamente prohibida y puede ser
+ ilegal. La confidencialidad y la integridad de la información transmitida por correo electrónico no pueden garantizarse, por lo que nuestra organización no asume ninguna responsabilidad por cualquier pérdida, daño o perjuicio que pueda surgir como resultado
+ de la recepción o transmisión de este correo electrónico.
+
+La comunicación por correo electrónico no implica un compromiso vinculante a menos que se exprese lo contrario mediante un acuerdo escrito y firmado por todas las partes involucradas.
+
+Gracias.
+INTEC
+
+This email and any attachments may contain confidential and privileged information intended solely for the designated recipient. If you are not the intended recipient or have received this
+ email in error, please notify the sender immediately and delete any unauthorized copies of this email and its attachments.
+
+Disclosure, reproduction, distribution, or any other use of this information by individuals or entities other than the designated recipient is strictly prohibited and may be unlawful. The
+ confidentiality and integrity of email transmission cannot be guaranteed, and our organization assumes no liability for any loss, damage, or harm that may arise as a result of the receipt or transmission of this email.
+
+Email communication does not imply a binding commitment unless otherwise expressed through a written agreement signed by all parties involved.
+
+Thank you.
+INTEC
+

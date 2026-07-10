@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #0b2545; /* Azul Corporativo */
+  
+  --brand-blue: #0b2545;
+  --brand-green: #139a43;
+  --brand-orange: #f39200;
+  --brand-blue-light: #ebf2fa;
+}
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-title: var(--font-orbitron), sans-serif;
+  
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-green: var(--brand-green);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-blue-light: var(--brand-blue-light);
+}
+
+h1, h2, h3, h4, h5, h6, .brand-title {
+  font-family: var(--font-title);
+  letter-spacing: 0.03em;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-panel-dark {
+  background: rgba(15, 23, 42, 0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+/* Technological Grid Mesh Pattern (Replaces Dots) */
+.tech-dot-grid {
+  --grid-bg: var(--background);
+  background: 
+    radial-gradient(circle at center, transparent 60%, var(--grid-bg) 98%),
+    linear-gradient(to right, rgba(11, 37, 69, 0.06) 1px, transparent 1px) center / 48px 48px,
+    linear-gradient(to bottom, rgba(11, 37, 69, 0.06) 1px, transparent 1px) center / 48px 48px;
+}
+
+/* Light blue background grid mesh override */
+.bg-brand-blue-light.tech-dot-grid {
+  --grid-bg: var(--brand-blue-light);
+}
+
+/* Dark theme grid mesh override */
+.bg-brand-blue.tech-dot-grid {
+  --grid-bg: var(--brand-blue);
+  background: 
+    radial-gradient(circle at center, transparent 60%, var(--grid-bg) 98%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px) center / 48px 48px,
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px) center / 48px 48px;
+}
+
+/* Subtle Tech Lines */
+.tech-lines {
+  background-image: 
+    linear-gradient(to right, rgba(15, 23, 42, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Custom Scrollbar for Premium Feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Native Scroll Reveal (Progressive Enhancement) */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .scroll-reveal-el {
+      animation: reveal auto linear backwards;
+      animation-timeline: view();
+      animation-range: entry 10% entry 30%;
+    }
+  }
+}

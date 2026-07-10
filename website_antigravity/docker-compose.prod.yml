@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  beraxis_landing:
+    container_name: beraxis_landing
+    image: beraxis_landing:latest
+    restart: always
+    ports:
+      - "3700:3700"
+    environment:
+      - NODE_ENV=production
+      - PORT=3700
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - CONTACT_EMAIL=${CONTACT_EMAIL}
+    networks:
+      - general_network
+
+networks:
+  general_network:
+    external: true

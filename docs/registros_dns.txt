@@ -1,0 +1,50 @@
+;;
+;; Domain:     beraxis.com.
+;; Exported:   2026-07-09 21:53:23
+;;
+;; This file is intended for use for informational and archival
+;; purposes ONLY and MUST be edited before use on a production
+;; DNS server.  In particular, you must:
+;;   -- update the SOA record with the correct authoritative name server
+;;   -- update the SOA record with the contact e-mail address information
+;;   -- update the NS record(s) with the authoritative name servers for this domain.
+;;
+;; For further information, please consult the BIND documentation
+;; located on the following website:
+;;
+;; http://www.isc.org/
+;;
+;; And RFC 1035:
+;;
+;; http://www.ietf.org/rfc/rfc1035.txt
+;;
+;; Please note that we do NOT offer technical support for any use
+;; of this zone data, the BIND name server, or any other third-party
+;; DNS software.
+;;
+;; Use at your own risk.
+;; SOA Record
+beraxis.com	3600	IN	SOA	lamar.ns.cloudflare.com. dns.cloudflare.com. 2053530060 10000 2400 604800 3600
+
+;; NS Records
+beraxis.com.	86400	IN	NS	lamar.ns.cloudflare.com.
+beraxis.com.	86400	IN	NS	lisa.ns.cloudflare.com.
+
+;; A Records
+beraxis.com.	1	IN	A	138.197.16.63 ; cf_tags=cf-proxied:true
+
+;; CNAME Records
+www.beraxis.com.	1	IN	CNAME	beraxis.com. ; cf_tags=cf-proxied:true
+
+;; MX Records
+beraxis.com.	3600	IN	MX	10 alt3.aspmx.l.google.com.
+beraxis.com.	3600	IN	MX	5 alt2.aspmx.l.google.com.
+beraxis.com.	3600	IN	MX	10 alt4.aspmx.l.google.com.
+beraxis.com.	3600	IN	MX	5 alt1.aspmx.l.google.com.
+beraxis.com.	3600	IN	MX	1 aspmx.l.google.com.
+
+;; TXT Records
+beraxis.com.	3600	IN	TXT	"v=spf1 include:_spf.google.com ~all"
+beraxis.com.	3600	IN	TXT	"google-site-verification=_FC04Dnx3pD8P-Ab4UYv45DJ9Bsuah7GJeYhuiimZKA"
+_dmarc.beraxis.com.	1	IN	TXT	"v=DMARC1; p=none; rua=mailto:jose@beraxis.com"
+google._domainkey.beraxis.com.	1	IN	TXT	"v=DKIM1;k=rsa;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5J9RZsPsU4nNNc6jPzztuUG+fJCgHaHwFip5KFj7qc95+/fwD7BnMyD5wKU+Dg72IaWi28eP7D3hN5faSCwKkpV6JaPVX6KkLzQOzMRPpMhFJi9UzU8ATtIU2zWkHrw7ILSiMNlKdcd5I+6wdyUw6ArHdO3OTQ55r+HsYQkS6aMpvpyFzVIdci1b/Rbuh8DiZI+" "DLpCk5616OBLdocHHTEpbbS0pjsYpUx3DHt2TpHr7CIILmfC6tKobk5UkEaY0SFELtwK+4KLd0/8rzo+uthTGS1ohm2C6bDpS3D+9hcCfgyjtKmYnKliPJa1DjZiw7WiIpgLCGyfZGIjkOdbI1QIDAQAB"

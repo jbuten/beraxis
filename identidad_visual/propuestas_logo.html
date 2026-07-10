@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuestas de Rediseño de Logotipo - Beraxis</title>
+  <meta name="description" content="Dashboard interactivo para visualizar y comparar las propuestas de mejora y rediseño del logotipo de Beraxis.">
+  <link rel="icon" type="image/png" href="assets/favicon-32x32.png">
+  
+  <!-- Identity CSS Stylesheet -->
+  <link rel="stylesheet" href="assets/beraxis-identity.css">
+  
+  <style>
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    [data-theme="dark"] body {
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(19, 154, 67, 0.04) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(243, 146, 0, 0.02) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(11, 37, 69, 0.15) 0px, transparent 80%);
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      background-color: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: var(--transition-normal);
+    }
+
+    [data-theme="dark"] .header-container {
+      background-color: rgba(5, 16, 30, 0.85);
+      border-bottom-color: #1e3a5f;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo-img {
+      height: 28px;
+      width: auto;
+      transition: var(--transition-normal);
+    }
+
+    [data-theme="dark"] .logo-img {
+      filter: brightness(0) invert(1);
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 1.75rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition-fast);
+      padding: 0.25rem 0;
+    }
+
+    .nav-link:hover {
+      color: var(--beraxis-green);
+    }
+
+    .theme-toggle-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-normal);
+    }
+
+    .theme-toggle-btn:hover {
+      background-color: var(--bg-secondary);
+      border-color: var(--text-primary);
+    }
+
+    .sun-icon { display: none; }
+    .moon-icon { display: block; }
+
+    [data-theme="dark"] .sun-icon { display: block; }
+    [data-theme="dark"] .moon-icon { display: none; }
+
+    .main-container {
+      max-width: 1200px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+      flex: 1;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .page-title {
+      font-family: var(--font-title);
+      font-weight: 900;
+      font-size: 2.25rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+
+    .page-subtitle {
+      font-family: var(--font-body);
+      color: var(--text-secondary);
+      text-align: center;
+      margin-bottom: 3.5rem;
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .proposals-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    @media (max-width: 900px) {
+      .proposals-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .proposal-card {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-normal);
+    }
+
+    [data-theme="dark"] .proposal-card {
+      background-color: rgba(11, 37, 69, 0.3);
+      border-color: #1e3a5f;
+    }
+
+    .proposal-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--beraxis-green);
+    }
+
+    .proposal-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    [data-theme="dark"] .proposal-header {
+      border-bottom-color: #1e3a5f;
+    }
+
+    .proposal-badge {
+      font-family: var(--font-title);
+      font-size: 0.75rem;
+      font-weight: 700;
+      background-color: var(--beraxis-blue);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-pill);
+    }
+
+    .proposal-title {
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0;
+      color: var(--text-primary);
+    }
+
+    /* Interactive Preview Area */
+    .proposal-preview-wrapper {
+      position: relative;
+      background-color: #ffffff;
+      padding: 3rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      transition: background-color 0.3s ease;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    [data-theme="dark"] .proposal-preview-wrapper {
+      border-bottom-color: #1e3a5f;
+    }
+
+    .bg-selector-bar {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      z-index: 10;
+    }
+
+    [data-theme="dark"] .bg-selector-bar {
+      background: rgba(11, 37, 69, 0.9);
+      border: 1px solid #1e3a5f;
+    }
+
+    .bg-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .bg-dot:hover {
+      transform: scale(1.2);
+    }
+
+    .bg-dot.dot-white { background-color: #ffffff; }
+    .bg-dot.dot-dark { background-color: #05101e; }
+    .bg-dot.dot-green { background-color: #139a43; }
+
+    .logo-container {
+      width: 100%;
+      max-width: 420px;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .proposal-content {
+      padding: 1.75rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .proposal-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .specs-list {
+      margin: 0 0 2rem 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.9rem;
+    }
+
+    .specs-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .specs-bullet {
+      color: var(--beraxis-green);
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .proposal-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: auto;
+    }
+
+    .proposal-actions .btn-beraxis {
+      flex: 1;
+      font-size: 0.85rem;
+      padding: 0.65rem 1rem;
+    }
+
+    /* Toast system */
+    #toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .toast {
+      background-color: var(--beraxis-blue);
+      color: white;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-left: 4px solid var(--beraxis-green);
+      animation: slideIn 0.3s ease-out forwards;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <div class="header-container">
+    <div class="header-logo" style="display: flex; align-items: center; gap: 10px;">
+      <img id="nav-logo" src="assets/logo_principal.svg" alt="Beraxis Logo" class="logo-img">
+      <span style="font-size: 0.8rem; font-weight: 700; color: var(--beraxis-orange); letter-spacing: 0.05em; text-transform: uppercase;">Propuestas</span>
+    </div>
+    <div class="header-nav">
+      <a href="index.html" class="nav-link">← Manual de Identidad</a>
+      <a href="firma.html" class="nav-link">Generador de Firmas ✉️</a>
+      <button class="theme-toggle-btn" id="theme-toggle" aria-label="Cambiar tema">
+        <svg class="sun-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.32 11.32l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="moon-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Showcase Container -->
+  <div class="main-container">
+    <h1 class="page-title">Propuestas de Mejora de Logotipo</h1>
+    <p class="page-subtitle">
+      Hemos desarrollado 4 alternativas refinadas a partir del logotipo actual. Cada una resuelve diferentes aspectos como la profundidad visual, la legibilidad tipográfica corporativa y el balance de proporciones. Usa los controles para evaluarlas en fondos claros, oscuros o color de marca.
+    </p>
+
+    <div class="proposals-grid">
+      
+      <!-- PROPUESTA 1: GRADIENTES Y SOMBRAS MODERNAS -->
+      <div class="proposal-card">
+        <div class="proposal-header">
+          <h3 class="proposal-title">Propuesta 1</h3>
+          <span class="proposal-badge">Estilo Gradiente 3D</span>
+        </div>
+        <div class="proposal-preview-wrapper" id="preview-1">
+          <div class="bg-selector-bar">
+            <div class="bg-dot dot-white" onclick="changePreviewBg('preview-1', '#ffffff')"></div>
+            <div class="bg-dot dot-dark" onclick="changePreviewBg('preview-1', '#05101e')"></div>
+            <div class="bg-dot dot-green" onclick="changePreviewBg('preview-1', '#139a43')"></div>
+          </div>
+          <div class="logo-container" id="logo-1-svg-box">
+            <!-- OPTION 1 SVG -->
+          </div>
+        </div>
+        <div class="proposal-content">
+          <p class="proposal-desc">
+            <strong>Gradientes Modernos y Profundidad 3D:</strong> Mantiene la geometría original del isotipo (símbolo "B") pero sustituye los colores planos por gradientes cromáticos y añade un efecto de sombra interna/baja que le da volumen, similar al diseño contemporáneo de grandes firmas tecnológicas.
+          </p>
+          <ul class="specs-list">
+            <li class="specs-item"><span class="specs-bullet">✓</span> Gradientes lineales de alto brillo para verde, azul y naranja.</li>
+            <li class="specs-item"><span class="specs-bullet">✓</span> Sombra paralela en el isotipo que aporta capas y tridimensionalidad.</li>
+            <li class="specs-item"><span class="specs-bullet">✓</span> Mantiene la fuente Orbitron con un kerning ligeramente optimizado.</li>
+          </ul>
+          <div class="proposal-actions">
+            <button class="btn-beraxis btn-beraxis-outline-green" onclick="copySvgCode(1)">Copiar SVG</button>
+            <button class="btn-beraxis btn-beraxis-primary" onclick="downloadSvg(1, 'beraxis_logo_propuesta_1.svg')">Descargar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROPUESTA 2: TIPOGRAFÍA REFINADA -->
+      <div class="proposal-card">
+        <div class="proposal-header">
+          <h3 class="proposal-title">Propuesta 2</h3>
+          <span class="proposal-badge">Tipografía Premium</span>
+        </div>
+        <div class="proposal-preview-wrapper" id="preview-2">
+          <div class="bg-selector-bar">
+            <div class="bg-dot dot-white" onclick="changePreviewBg('preview-2', '#ffffff')"></div>
+            <div class="bg-dot dot-dark" onclick="changePreviewBg('preview-2', '#05101e')"></div>
+            <div class="bg-dot dot-green" onclick="changePreviewBg('preview-2', '#139a43')"></div>
+          </div>
+          <div class="logo-container" id="logo-2-svg-box">
+            <!-- OPTION 2 SVG -->
+          </div>
+        </div>
+        <div class="proposal-content">
+          <p class="proposal-desc">
+            <strong>Tipografía Sans-Serif Geométrica:</strong> Cambia la tipografía 'Orbitron' por **Outfit**, un tipo de letra geométrico de alta gama que aporta un aspecto mucho más premium, limpio y adecuado para una firma de consultoría tecnológica e institucional.
+          </p>
+          <ul class="specs-list">
+            <li class="specs-item"><span class="specs-bullet">✓</span> Letras con mayor espaciado (tracking) para mejorar legibilidad digital.</li>
+            <li class="specs-item"><span class="specs-bullet">✓</span> Contraste de peso visual: "BERA" en peso ligero (Light 300) y "XIS" en peso grueso (SemiBold 600).</li>
+            <li class="specs-item"><span class="specs-bullet">✓</span> Isotipo simplificado y pulido en sus uniones vectoriales.</li>
+          </ul>
+          <div class="proposal-actions">
+            <button class="btn-beraxis btn-beraxis-outline-green" onclick="copySvgCode(2)">Copiar SVG</button>
+            <button class="btn-beraxis btn-beraxis-primary" onclick="downloadSvg(2, 'beraxis_logo_propuesta_2.svg')">Descargar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROPUESTA 3: REDISEÑO COMPLETO (CYBER RIBBON B) -->
+      <div class="proposal-card">
+        <div class="proposal-header">
+          <h3 class="proposal-title">Propuesta 3</h3>
+          <span class="proposal-badge">Concepto Futurista</span>
+        </div>
+        <div class="proposal-preview-wrapper" id="preview-3">
+          <div class="bg-selector-bar">
+            <div class="bg-dot dot-white" onclick="changePreviewBg('preview-3', '#ffffff')"></div>
+            <div class="bg-dot dot-dark" onclick="changePreviewBg('preview-3', '#05101e')"></div>
+            <div class="bg-dot dot-green" onclick="changePreviewBg('preview-3', '#139a43')"></div>
+          </div>
+          <div class="logo-container" id="logo-3-svg-box">
+            <!-- OPTION 3 SVG -->
+          </div>
+        </div>
+        <div class="proposal-content">
+          <p class="proposal-desc">
+            <strong>Nuevo Isotipo "Tech Ribbon B":</strong> Rediseño total del símbolo. Combina un tallo digital sólido (seguridad, infraestructura) con dos lazos/cintas redondeadas entrelazadas que forman la letra "B" (integración de APIs, firmas digitales y flujos seguros).
+          </p>
+          <ul class="specs-list">
+            <li class="specs-item"><span class="specs-bullet">✓</span> Isotipo minimalista 100% geométrico y fácil de reproducir a cualquier tamaño.</li>
+            <li class="specs-item"><span class="specs-bullet">✓</span> Paleta oficial aplicada en cintas con gradientes suaves y transparencias.</li>
+            <li class="specs-item"><span class="specs-bullet">✓</span> Combinación con la tipografía Outfit en mayúsculas amplias.</li>
+          </ul>
+          <div class="proposal-actions">
+            <button class="btn-beraxis btn-beraxis-outline-green" onclick="copySvgCode(3)">Copiar SVG</button>
+            <button class="btn-beraxis btn-beraxis-primary" onclick="downloadSvg(3, 'beraxis_logo_propuesta_3.svg')">Descargar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROPUESTA 4: AJUSTES DE PROPORCIÓN Y ALINEACIÓN -->
+      <div class="proposal-card">
+        <div class="proposal-header">
+          <h3 class="proposal-title">Propuesta 4</h3>
+          <span class="proposal-badge">Balance y Proporción</span>
+        </div>
+        <div class="proposal-preview-wrapper" id="preview-4">
+          <div class="bg-selector-bar">
+            <div class="bg-dot dot-white" onclick="changePreviewBg('preview-4', '#ffffff')"></div>
+            <div class="bg-dot dot-dark" onclick="changePreviewBg('preview-4', '#05101e')"></div>
+            <div class="bg-dot dot-green" onclick="changePreviewBg('preview-4', '#139a43')"></div>
+          </div>
+          <div class="logo-container" id="logo-4-svg-box">
+            <!-- OPTION 4 SVG -->
+          </div>
+        </div>
+        <div class="proposal-content">
+          <p class="proposal-desc">
+            <strong>Ajustes de Balance Óptico:</strong> Mantiene la estética original (colores planos e isotipo clásico) pero corrige el peso visual. Reduce ligeramente el tamaño del isotipo respecto al texto y optimiza el espaciado para lograr una mayor armonía y balance de masas.
+          </p>
+          <ul class="specs-list">
+            <li class="specs-item"><span class="specs-bullet">✓</span> Isotipo escalado un 15% para que no sobrepase ni eclipse al texto.</li>
+            <li class="specs-item"><span class="specs-bullet">✓</span> Incremento en la separación entre isotipo y tipografía (aire visual).</li>
+            <li class="specs-item"><span class="specs-bullet">✓</span> Tipografía Orbitron más delgada y elegante, con tracking extra amplio.</li>
+          </ul>
+          <div class="proposal-actions">
+            <button class="btn-beraxis btn-beraxis-outline-green" onclick="copySvgCode(4)">Copiar SVG</button>
+            <button class="btn-beraxis btn-beraxis-primary" onclick="downloadSvg(4, 'beraxis_logo_propuesta_4.svg')">Descargar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Feedbacks container -->
+  <div id="toast-container"></div>
+
+  <script>
+    // Theme toggle logic
+    const htmlElement = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const navLogo = document.getElementById('nav-logo');
+
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlElement.setAttribute('data-theme', savedTheme);
+    updateNavLogoFilter(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = htmlElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      htmlElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateNavLogoFilter(newTheme);
+      showToast(`Modo ${newTheme === 'dark' ? 'Oscuro' : 'Claro'} activado`, 'info');
+    });
+
+    function updateNavLogoFilter(theme) {
+      if (theme === 'dark') {
+        navLogo.style.filter = 'brightness(0) invert(1)';
+      } else {
+        navLogo.style.filter = 'none';
+      }
+    }
+
+    // Change background of specific preview wrapper
+    window.changePreviewBg = function(wrapperId, color) {
+      const wrapper = document.getElementById(wrapperId);
+      if (!wrapper) return;
+      wrapper.style.backgroundColor = color;
+      
+      // Update logo colors if placed on dark background (e.g. text elements change to white)
+      const svg = wrapper.querySelector('svg');
+      if (!svg) return;
+      
+      const isDarkBg = (color === '#05101e' || color === '#139a43');
+      const textElements = svg.querySelectorAll('.brand-text-target, .brand-text');
+      
+      textElements.forEach(text => {
+        if (isDarkBg) {
+          text.style.fill = '#ffffff';
+        } else {
+          // If option 2 text has dual colors, restore them properly
+          if (text.classList.contains('brand-text-dual')) {
+            text.style.fill = text.getAttribute('data-original-fill') || '#0b2545';
+          } else {
+            text.style.fill = '#0b2545';
+          }
+        }
+      });
+    };
+
+    // Toast Utility
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = `toast`;
+      toast.innerHTML = `<span>✓</span> <span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => { toast.remove(); }, 3000);
+    }
+
+    // Definitions of SVGs for 4 proposals
+    const commonDefs = `
+      <defs>
+        <!-- Option 1: Linear gradients for depth -->
+        <linearGradient id="grad-green" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1ee562" />
+          <stop offset="100%" stop-color="#0f7d34" />
+        </linearGradient>
+        <linearGradient id="grad-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1e4e86" />
+          <stop offset="100%" stop-color="#041221" />
+        </linearGradient>
+        <linearGradient id="grad-orange" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ffb23e" />
+          <stop offset="100%" stop-color="#c66a00" />
+        </linearGradient>
+        
+        <!-- Subtle shadow filter -->
+        <filter id="svg-shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="4" dy="7" stdDeviation="5" flood-opacity="0.25" flood-color="#030b14"/>
+        </filter>
+        
+        <!-- Typography imports -->
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Outfit:wght@300;400;600;700&display=swap');
+          
+          .text-orbitron {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            fill: #0b2545;
+            letter-spacing: 0.18em;
+            transition: fill 0.3s ease;
+          }
+          .text-outfit-light {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            fill: #0b2545;
+            letter-spacing: 0.28em;
+            transition: fill 0.3s ease;
+          }
+          .text-outfit-bold {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            fill: #0b2545;
+            letter-spacing: 0.28em;
+            transition: fill 0.3s ease;
+          }
+          .text-orbitron-thin {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            fill: #0b2545;
+            letter-spacing: 0.32em;
+            transition: fill 0.3s ease;
+          }
+        </style>
+      </defs>
+    `;
+
+    // Path definitions of isotype
+    const isotypePaths = `
+      <path d="M 562.7,319.6 L 1141.0,319.0 L 1236.0,320.0 L 1267.0,322.5 L 1290.0,326.5 L 1317.0,334.0 L 1341.0,343.5 L 1365.0,355.9 L 1386.0,369.8 L 1412.0,390.9 L 1427.1,406.0 L 1444.4,427.0 L 1461.3,453.0 L 1472.1,475.0 L 1482.6,503.0 L 1489.2,529.0 L 1493.1,556.0 L 1494.6,590.0 L 1493.1,611.0 L 1488.3,641.0 L 1481.5,667.9 L 1465.1,709.8 L 1460.4,719.2 L 1457.6,721.8 L 1455.7,717.8 L 1453.3,690.2 L 1447.5,674.6 L 1435.2,649.0 L 1419.4,628.0 L 1399.7,609.1 L 1378.0,594.7 L 1350.4,581.2 L 1321.0,572.5 L 1299.0,569.0 L 1281.0,568.0 L 809.0,568.0 L 799.0,567.3 L 792.0,565.0 L 785.0,560.8 L 776.0,553.0 L 559.1,338.0 L 554.8,331.9 L 552.8,325.4 L 555.2,322.2 L 561.8,319.7 Z" />
+      <path d="M 1092.5,676.9 L 1408.0,677.0 L 1440.5,679.6 L 1445.9,683.4 L 1448.7,690.0 L 1451.7,710.0 L 1451.2,732.0 L 1447.0,744.0 L 1413.6,805.0 L 1401.4,821.0 L 1380.5,844.7 L 1345.6,874.9 L 1334.0,883.0 L 1318.0,891.8 L 1300.0,900.0 L 1281.0,906.9 L 1254.0,913.8 L 1227.0,917.6 L 1040.0,918.0 L 1033.0,919.0 L 1026.3,922.4 L 1019.1,929.0 L 984.6,970.0 L 726.2,1285.0 L 714.0,1295.2 L 708.0,1297.3 L 701.0,1298.0 L 501.0,1297.6 L 491.4,1294.4 L 485.1,1287.7 L 483.2,1279.0 L 487.0,1269.0 L 494.2,1260.2 L 532.8,1223.0 L 545.9,1207.0 L 862.0,733.0 L 884.9,699.0 L 893.5,688.3 L 905.0,680.0 L 918.0,677.1 L 1091.5,676.9 Z" />
+      <path d="M 1406.9,826.2 L 1415.0,828.9 L 1445.0,851.7 L 1462.6,868.0 L 1480.5,887.7 L 1491.9,902.0 L 1504.5,921.0 L 1519.3,952.0 L 1525.4,967.0 L 1530.2,984.0 L 1536.4,1015.0 L 1538.4,1033.0 L 1539.8,1055.0 L 1539.2,1072.0 L 1533.9,1109.0 L 1522.3,1153.0 L 1505.9,1190.0 L 1485.7,1221.0 L 1454.8,1257.5 L 1417.0,1289.5 L 1385.0,1309.1 L 1363.0,1319.2 L 1338.0,1328.3 L 1302.0,1337.4 L 1278.0,1340.9 L 1245.0,1343.0 L 1213.0,1342.0 L 1166.0,1343.0 L 1114.0,1342.0 L 1063.0,1343.0 L 881.0,1342.0 L 850.0,1343.0 L 809.0,1341.9 L 805.2,1340.3 L 804.5,1337.7 L 808.1,1331.0 L 822.1,1315.0 L 914.4,1214.0 L 1007.5,1114.1 L 1016.0,1107.7 L 1025.0,1105.5 L 1230.0,1105.2 L 1254.0,1103.9 L 1279.0,1098.5 L 1302.0,1090.5 L 1329.0,1075.6 L 1347.2,1062.1 L 1367.2,1040.0 L 1380.3,1020.0 L 1387.5,1001.0 L 1392.7,972.0 L 1392.1,947.0 L 1386.7,925.0 L 1378.1,906.0 L 1360.4,881.0 L 1358.9,876.3 L 1359.1,872.7 L 1362.3,867.6 L 1382.9,849.0 L 1400.3,829.6 L 1406.0,826.3 Z" />
+    `;
+
+    // SVG 1: Gradients + Shadows
+    const svg1 = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="100%">
+  ${commonDefs}
+  <g transform="translate(120, 100) scale(0.132) translate(-1011.5, -831)" filter="url(#svg-shadow)">
+    <path d="M 562.7,319.6 L 1141.0,319.0 L 1236.0,320.0 L 1267.0,322.5 L 1290.0,326.5 L 1317.0,334.0 L 1341.0,343.5 L 1365.0,355.9 L 1386.0,369.8 L 1412.0,390.9 L 1427.1,406.0 L 1444.4,427.0 L 1461.3,453.0 L 1472.1,475.0 L 1482.6,503.0 L 1489.2,529.0 L 1493.1,556.0 L 1494.6,590.0 L 1493.1,611.0 L 1488.3,641.0 L 1481.5,667.9 L 1465.1,709.8 L 1460.4,719.2 L 1457.6,721.8 L 1455.7,717.8 L 1453.3,690.2 L 1447.5,674.6 L 1435.2,649.0 L 1419.4,628.0 L 1399.7,609.1 L 1378.0,594.7 L 1350.4,581.2 L 1321.0,572.5 L 1299.0,569.0 L 1281.0,568.0 L 809.0,568.0 L 799.0,567.3 L 792.0,565.0 L 785.0,560.8 L 776.0,553.0 L 559.1,338.0 L 554.8,331.9 L 552.8,325.4 L 555.2,322.2 L 561.8,319.7 Z" fill="url(#grad-green)" />
+    <path d="M 1092.5,676.9 L 1408.0,677.0 L 1440.5,679.6 L 1445.9,683.4 L 1448.7,690.0 L 1451.7,710.0 L 1451.2,732.0 L 1447.0,744.0 L 1413.6,805.0 L 1401.4,821.0 L 1380.5,844.7 L 1345.6,874.9 L 1334.0,883.0 L 1318.0,891.8 L 1300.0,900.0 L 1281.0,906.9 L 1254.0,913.8 L 1227.0,917.6 L 1040.0,918.0 L 1033.0,919.0 L 1026.3,922.4 L 1019.1,929.0 L 984.6,970.0 L 726.2,1285.0 L 714.0,1295.2 L 708.0,1297.3 L 701.0,1298.0 L 501.0,1297.6 L 491.4,1294.4 L 485.1,1287.7 L 483.2,1279.0 L 487.0,1269.0 L 494.2,1260.2 L 532.8,1223.0 L 545.9,1207.0 L 862.0,733.0 L 884.9,699.0 L 893.5,688.3 L 905.0,680.0 L 918.0,677.1 L 1091.5,676.9 Z" fill="url(#grad-blue)" />
+    <path d="M 1406.9,826.2 L 1415.0,828.9 L 1445.0,851.7 L 1462.6,868.0 L 1480.5,887.7 L 1491.9,902.0 L 1504.5,921.0 L 1519.3,952.0 L 1525.4,967.0 L 1530.2,984.0 L 1536.4,1015.0 L 1538.4,1033.0 L 1539.8,1055.0 L 1539.2,1072.0 L 1533.9,1109.0 L 1522.3,1153.0 L 1505.9,1190.0 L 1485.7,1221.0 L 1454.8,1257.5 L 1417.0,1289.5 L 1385.0,1309.1 L 1363.0,1319.2 L 1338.0,1328.3 L 1302.0,1337.4 L 1278.0,1340.9 L 1245.0,1343.0 L 1213.0,1342.0 L 1166.0,1343.0 L 1114.0,1342.0 L 1063.0,1343.0 L 881.0,1342.0 L 850.0,1343.0 L 809.0,1341.9 L 805.2,1340.3 L 804.5,1337.7 L 808.1,1331.0 L 822.1,1315.0 L 914.4,1214.0 L 1007.5,1114.1 L 1016.0,1107.7 L 1025.0,1105.5 L 1230.0,1105.2 L 1254.0,1103.9 L 1279.0,1098.5 L 1302.0,1090.5 L 1329.0,1075.6 L 1347.2,1062.1 L 1367.2,1040.0 L 1380.3,1020.0 L 1387.5,1001.0 L 1392.7,972.0 L 1392.1,947.0 L 1386.7,925.0 L 1378.1,906.0 L 1360.4,881.0 L 1358.9,876.3 L 1359.1,872.7 L 1362.3,867.6 L 1382.9,849.0 L 1400.3,829.6 L 1406.0,826.3 Z" fill="url(#grad-orange)" />
+  </g>
+  <text x="230" y="122" font-size="72" class="text-orbitron brand-text-target">BERAXIS</text>
+</svg>
+`;
+
+    // SVG 2: Refined Typography (Outfit)
+    const svg2 = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="100%">
+  ${commonDefs}
+  <g transform="translate(120, 100) scale(0.132) translate(-1011.5, -831)">
+    <path d="M 562.7,319.6 L 1141.0,319.0 L 1236.0,320.0 L 1267.0,322.5 L 1290.0,326.5 L 1317.0,334.0 L 1341.0,343.5 L 1365.0,355.9 L 1386.0,369.8 L 1412.0,390.9 L 1427.1,406.0 L 1444.4,427.0 L 1461.3,453.0 L 1472.1,475.0 L 1482.6,503.0 L 1489.2,529.0 L 1493.1,556.0 L 1494.6,590.0 L 1493.1,611.0 L 1488.3,641.0 L 1481.5,667.9 L 1465.1,709.8 L 1460.4,719.2 L 1457.6,721.8 L 1455.7,717.8 L 1453.3,690.2 L 1447.5,674.6 L 1435.2,649.0 L 1419.4,628.0 L 1399.7,609.1 L 1378.0,594.7 L 1350.4,581.2 L 1321.0,572.5 L 1299.0,569.0 L 1281.0,568.0 L 809.0,568.0 L 799.0,567.3 L 792.0,565.0 L 785.0,560.8 L 776.0,553.0 L 559.1,338.0 L 554.8,331.9 L 552.8,325.4 L 555.2,322.2 L 561.8,319.7 Z" fill="#139a43" />
+    <path d="M 1092.5,676.9 L 1408.0,677.0 L 1440.5,679.6 L 1445.9,683.4 L 1448.7,690.0 L 1451.7,710.0 L 1451.2,732.0 L 1447.0,744.0 L 1413.6,805.0 L 1401.4,821.0 L 1380.5,844.7 L 1345.6,874.9 L 1334.0,883.0 L 1318.0,891.8 L 1300.0,900.0 L 1281.0,906.9 L 1254.0,913.8 L 1227.0,917.6 L 1040.0,918.0 L 1033.0,919.0 L 1026.3,922.4 L 1019.1,929.0 L 984.6,970.0 L 726.2,1285.0 L 714.0,1295.2 L 708.0,1297.3 L 701.0,1298.0 L 501.0,1297.6 L 491.4,1294.4 L 485.1,1287.7 L 483.2,1279.0 L 487.0,1269.0 L 494.2,1260.2 L 532.8,1223.0 L 545.9,1207.0 L 862.0,733.0 L 884.9,699.0 L 893.5,688.3 L 905.0,680.0 L 918.0,677.1 L 1091.5,676.9 Z" fill="#0b2545" />
+    <path d="M 1406.9,826.2 L 1415.0,828.9 L 1445.0,851.7 L 1462.6,868.0 L 1480.5,887.7 L 1491.9,902.0 L 1504.5,921.0 L 1519.3,952.0 L 1525.4,967.0 L 1530.2,984.0 L 1536.4,1015.0 L 1538.4,1033.0 L 1539.8,1055.0 L 1539.2,1072.0 L 1533.9,1109.0 L 1522.3,1153.0 L 1505.9,1190.0 L 1485.7,1221.0 L 1454.8,1257.5 L 1417.0,1289.5 L 1385.0,1309.1 L 1363.0,1319.2 L 1338.0,1328.3 L 1302.0,1337.4 L 1278.0,1340.9 L 1245.0,1343.0 L 1213.0,1342.0 L 1166.0,1343.0 L 1114.0,1342.0 L 1063.0,1343.0 L 881.0,1342.0 L 850.0,1343.0 L 809.0,1341.9 L 805.2,1340.3 L 804.5,1337.7 L 808.1,1331.0 L 822.1,1315.0 L 914.4,1214.0 L 1007.5,1114.1 L 1016.0,1107.7 L 1025.0,1105.5 L 1230.0,1105.2 L 1254.0,1103.9 L 1279.0,1098.5 L 1302.0,1090.5 L 1329.0,1075.6 L 1347.2,1062.1 L 1367.2,1040.0 L 1380.3,1020.0 L 1387.5,1001.0 L 1392.7,972.0 L 1392.1,947.0 L 1386.7,925.0 L 1378.1,906.0 L 1360.4,881.0 L 1358.9,876.3 L 1359.1,872.7 L 1362.3,867.6 L 1382.9,849.0 L 1400.3,829.6 L 1406.0,826.3 Z" fill="#f39200" />
+  </g>
+  <text x="230" y="122" font-size="62" class="brand-text-dual" data-original-fill="#0b2545">
+    <tspan class="text-outfit-light">BERA</tspan><tspan class="text-outfit-bold" fill="#0b2545">XIS</tspan>
+  </text>
+</svg>
+`;
+
+    // SVG 3: New Isotype Design (Modern Tech B)
+    const svg3 = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="100%">
+  ${commonDefs}
+  <!-- Tech ribbon B design -->
+  <g transform="translate(125, 100) scale(1) translate(-100, -100)" filter="url(#svg-shadow)">
+    <!-- Stem (Blue) -->
+    <rect x="55" y="40" width="22" height="120" rx="8" fill="url(#grad-blue)" />
+    
+    <!-- Top Loop (Green Ribbon) -->
+    <path d="M 72 65 C 112 55, 148 65, 148 100 C 148 128, 120 135, 72 135" 
+          fill="none" stroke="url(#grad-green)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" />
+          
+    <!-- Bottom Loop (Orange Ribbon) -->
+    <path d="M 72 100 C 122 95, 155 105, 155 135 C 155 162, 122 165, 72 165" 
+          fill="none" stroke="url(#grad-orange)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" />
+          
+    <!-- Connecting Core Joint -->
+    <circle cx="72" cy="100" r="9" fill="#0b2545" />
+    <circle cx="72" cy="100" r="4" fill="#ffffff" />
+  </g>
+  <text x="230" y="121" font-size="60" class="text-outfit-bold brand-text-target" fill="#0b2545">BERAXIS</text>
+</svg>
+`;
+
+    // SVG 4: Perfect Alignment and Proportions
+    const svg4 = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="100%">
+  ${commonDefs}
+  <!-- Isotype: Rescaled (smaller scale 0.11 instead of 0.132) and shifted for optical center alignment -->
+  <g transform="translate(110, 100) scale(0.11) translate(-1011.5, -831)">
+    <path d="M 562.7,319.6 L 1141.0,319.0 L 1236.0,320.0 L 1267.0,322.5 L 1290.0,326.5 L 1317.0,334.0 L 1341.0,343.5 L 1365.0,355.9 L 1386.0,369.8 L 1412.0,390.9 L 1427.1,406.0 L 1444.4,427.0 L 1461.3,453.0 L 1472.1,475.0 L 1482.6,503.0 L 1489.2,529.0 L 1493.1,556.0 L 1494.6,590.0 L 1493.1,611.0 L 1488.3,641.0 L 1481.5,667.9 L 1465.1,709.8 L 1460.4,719.2 L 1457.6,721.8 L 1455.7,717.8 L 1453.3,690.2 L 1447.5,674.6 L 1435.2,649.0 L 1419.4,628.0 L 1399.7,609.1 L 1378.0,594.7 L 1350.4,581.2 L 1321.0,572.5 L 1299.0,569.0 L 1281.0,568.0 L 809.0,568.0 L 799.0,567.3 L 792.0,565.0 L 785.0,560.8 L 776.0,553.0 L 559.1,338.0 L 554.8,331.9 L 552.8,325.4 L 555.2,322.2 L 561.8,319.7 Z" fill="#139a43" />
+    <path d="M 1092.5,676.9 L 1408.0,677.0 L 1440.5,679.6 L 1445.9,683.4 L 1448.7,690.0 L 1451.7,710.0 L 1451.2,732.0 L 1447.0,744.0 L 1413.6,805.0 L 1401.4,821.0 L 1380.5,844.7 L 1345.6,874.9 L 1334.0,883.0 L 1318.0,891.8 L 1300.0,900.0 L 1281.0,906.9 L 1254.0,913.8 L 1227.0,917.6 L 1040.0,918.0 L 1033.0,919.0 L 1026.3,922.4 L 1019.1,929.0 L 984.6,970.0 L 726.2,1285.0 L 714.0,1295.2 L 708.0,1297.3 L 701.0,1298.0 L 501.0,1297.6 L 491.4,1294.4 L 485.1,1287.7 L 483.2,1279.0 L 487.0,1269.0 L 494.2,1260.2 L 532.8,1223.0 L 545.9,1207.0 L 862.0,733.0 L 884.9,699.0 L 893.5,688.3 L 905.0,680.0 L 918.0,677.1 L 1091.5,676.9 Z" fill="#0b2545" />
+    <path d="M 1406.9,826.2 L 1415.0,828.9 L 1445.0,851.7 L 1462.6,868.0 L 1480.5,887.7 L 1491.9,902.0 L 1504.5,921.0 L 1519.3,952.0 L 1525.4,967.0 L 1530.2,984.0 L 1536.4,1015.0 L 1538.4,1033.0 L 1539.8,1055.0 L 1539.2,1072.0 L 1533.9,1109.0 L 1522.3,1153.0 L 1505.9,1190.0 L 1485.7,1221.0 L 1454.8,1257.5 L 1417.0,1289.5 L 1385.0,1309.1 L 1363.0,1319.2 L 1338.0,1328.3 L 1302.0,1337.4 L 1278.0,1340.9 L 1245.0,1343.0 L 1213.0,1342.0 L 1166.0,1343.0 L 1114.0,1342.0 L 1063.0,1343.0 L 881.0,1342.0 L 850.0,1343.0 L 809.0,1341.9 L 805.2,1340.3 L 804.5,1337.7 L 808.1,1331.0 L 822.1,1315.0 L 914.4,1214.0 L 1007.5,1114.1 L 1016.0,1107.7 L 1025.0,1105.5 L 1230.0,1105.2 L 1254.0,1103.9 L 1279.0,1098.5 L 1302.0,1090.5 L 1329.0,1075.6 L 1347.2,1062.1 L 1367.2,1040.0 L 1380.3,1020.0 L 1387.5,1001.0 L 1392.7,972.0 L 1392.1,947.0 L 1386.7,925.0 L 1378.1,906.0 L 1360.4,881.0 L 1358.9,876.3 L 1359.1,872.7 L 1362.3,867.6 L 1382.9,849.0 L 1400.3,829.6 L 1406.0,826.3 Z" fill="#f39200" />
+  </g>
+  <!-- Text: Shifted to the right (x=240 instead of 230) for better spacing and kerning -->
+  <text x="240" y="118" font-size="56" class="text-orbitron-thin brand-text-target">BERAXIS</text>
+</svg>
+`;
+
+    // Inject SVGs into containers
+    document.getElementById('logo-1-svg-box').innerHTML = svg1;
+    document.getElementById('logo-2-svg-box').innerHTML = svg2;
+    document.getElementById('logo-3-svg-box').innerHTML = svg3;
+    document.getElementById('logo-4-svg-box').innerHTML = svg4;
+
+    // Helper functions to handle copy & download
+    const svgMap = { 1: svg1, 2: svg2, 3: svg3, 4: svg4 };
+
+    window.copySvgCode = function(proposalId) {
+      const code = svgMap[proposalId].trim();
+      navigator.clipboard.writeText(code).then(() => {
+        showToast(`¡Código SVG de Propuesta ${proposalId} copiado al portapapeles!`);
+      }).catch(() => {
+        showToast('Error al copiar el código SVG', 'info');
+      });
+    };
+
+    window.downloadSvg = function(proposalId, filename) {
+      const code = svgMap[proposalId].trim();
+      const blob = new Blob([code], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(`Descargando ${filename}...`);
+    };
+  </script>
+</body>
+</html>

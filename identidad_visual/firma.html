@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beraxis - Generador de Firmas de Correo</title>
+  <meta name="description" content="Generador oficial de firmas de correo electrónico corporativo para el equipo de Beraxis.">
+  <link rel="icon" type="image/png" href="assets/favicon-32x32.png">
+  
+  <!-- Identity CSS Stylesheet -->
+  <link rel="stylesheet" href="assets/beraxis-identity.css">
+  
+  <style>
+    /* Scoped styles for the signature generator */
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    [data-theme="dark"] body {
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(19, 154, 67, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(243, 146, 0, 0.03) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(11, 37, 69, 0.2) 0px, transparent 80%);
+    }
+
+    /* Navigation Header */
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: var(--transition-normal);
+    }
+
+    [data-theme="dark"] .header-container {
+      background-color: rgba(5, 16, 30, 0.85);
+      border-bottom-color: #1e3a5f;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo-img {
+      height: 28px;
+      width: auto;
+      transition: var(--transition-normal);
+    }
+
+    [data-theme="dark"] .logo-img {
+      filter: brightness(0) invert(1);
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 1.75rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition-fast);
+      position: relative;
+      padding: 0.25rem 0;
+    }
+
+    .nav-link:hover {
+      color: var(--beraxis-green);
+    }
+
+    .theme-toggle-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-normal);
+    }
+
+    .theme-toggle-btn:hover {
+      background-color: var(--bg-secondary);
+      border-color: var(--text-primary);
+    }
+
+    .sun-icon { display: none; }
+    .moon-icon { display: block; }
+
+    [data-theme="dark"] .sun-icon { display: block; }
+    [data-theme="dark"] .moon-icon { display: none; }
+
+    /* Main Container */
+    .generator-container {
+      max-width: 1200px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    .generator-title {
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      text-align: center;
+    }
+
+    .generator-subtitle {
+      font-family: var(--font-body);
+      color: var(--text-secondary);
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 1.05rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .generator-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 2.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .generator-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Panel: Form */
+    .editor-card {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+
+    [data-theme="dark"] .editor-card {
+      background-color: rgba(11, 37, 69, 0.4);
+      border-color: #1e3a5f;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-label {
+      display: block;
+      font-family: var(--font-title);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: var(--transition-normal);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--beraxis-green);
+      box-shadow: 0 0 0 3px rgba(19, 154, 67, 0.15);
+    }
+
+    [data-theme="dark"] .form-input {
+      background-color: rgba(5, 16, 30, 0.7);
+      border-color: #1e3a5f;
+    }
+
+    [data-theme="dark"] .form-input:focus {
+      border-color: var(--beraxis-green);
+    }
+
+    /* Right Panel: Previews */
+    .previews-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .signature-card {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-normal);
+    }
+
+    [data-theme="dark"] .signature-card {
+      background-color: rgba(11, 37, 69, 0.2);
+      border-color: #1e3a5f;
+    }
+
+    .signature-card:hover {
+      border-color: rgba(19, 154, 67, 0.3);
+      box-shadow: var(--shadow-md);
+    }
+
+    .signature-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.75rem;
+    }
+
+    .signature-name {
+      font-family: var(--font-title);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .signature-badge {
+      font-family: var(--font-title);
+      font-size: 0.65rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+    }
+
+    .preview-box {
+      background-color: #ffffff; /* Signatures always preview on light background (typical email client) */
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+    }
+
+    .actions-row {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-action {
+      flex: 1;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: var(--transition-normal);
+      text-decoration: none;
+    }
+
+    .btn-copy-rich {
+      background-color: var(--beraxis-blue);
+      color: var(--beraxis-white);
+      border: 1px solid var(--beraxis-green);
+    }
+
+    .btn-copy-rich:hover {
+      background-color: var(--beraxis-green);
+      color: var(--beraxis-white);
+      box-shadow: 0 4px 12px rgba(19, 154, 67, 0.3);
+    }
+
+    .btn-copy-html {
+      background-color: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-copy-html:hover {
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      border-color: var(--text-primary);
+    }
+
+    /* Setup Guide Section */
+    .guide-section {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin-top: 3rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    [data-theme="dark"] .guide-section {
+      background-color: rgba(11, 37, 69, 0.1);
+      border-color: #1e3a5f;
+    }
+
+    .guide-title {
+      font-family: var(--font-title);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .guide-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .guide-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .step-card {
+      position: relative;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      background-color: var(--beraxis-green);
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .step-text {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .step-text strong {
+      color: var(--text-primary);
+    }
+
+    /* Toast Container */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      pointer-events: none;
+    }
+
+    .toast {
+      background-color: var(--beraxis-blue);
+      color: var(--beraxis-white);
+      border: 1px solid var(--beraxis-green);
+      padding: 0.85rem 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      animation: slideIn 0.3s ease forwards;
+      pointer-events: auto;
+    }
+
+    .toast-info {
+      border-color: var(--beraxis-orange);
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(1rem);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Footer */
+    .brand-footer {
+      text-align: center;
+      padding: 2.5rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: auto;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    [data-theme="dark"] .brand-footer {
+      border-top-color: #1e3a5f;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header id="main-header" class="header-container">
+    <div class="header-logo">
+      <a href="index.html" style="text-decoration: none;">
+        <img id="nav-logo" src="assets/logo_principal.svg" alt="Beraxis Logo" class="logo-img">
+      </a>
+    </div>
+    <div class="header-nav">
+      <a href="index.html" class="nav-link">← Volver al Brandbook</a>
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="sun-icon"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="moon-icon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="generator-container">
+    <h1 class="generator-title">Firmas de Correo Beraxis</h1>
+    <p class="generator-subtitle">
+      Genera, personaliza e implementa tu firma de correo electrónico corporativo con la paleta de colores y lineamientos oficiales.
+    </p>
+
+    <div class="generator-grid">
+      <!-- Editor Form -->
+      <div class="editor-card">
+        <h3 class="brand-title" style="margin-bottom: 1.5rem; font-size: 1.15rem; color: var(--beraxis-green);">Datos de Contacto</h3>
+        
+        <div class="form-group">
+          <label class="form-label" for="input-name">Nombre Completo</label>
+          <input type="text" id="input-name" class="form-input" value="Ing. José Buten" placeholder="Ej. Ing. José Buten">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-title">Cargo / Posición</label>
+          <input type="text" id="input-title" class="form-input" value="CTO & Asesor Tecnológico" placeholder="Ej. CTO & Asesor Tecnológico">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-email">Correo Electrónico</label>
+          <input type="email" id="input-email" class="form-input" value="jbuten@beraxis.com" placeholder="Ej. jbuten@beraxis.com">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-phone">Teléfono / Celular (Opcional)</label>
+          <input type="text" id="input-phone" class="form-input" value="+1 (829) 555-0199" placeholder="Ej. +1 (829) 555-0199 (dejar vacío si no aplica)">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="input-linkedin">LinkedIn (URL)</label>
+          <input type="url" id="input-linkedin" class="form-input" value="https://www.linkedin.com/in/jose-buten-10567117/" placeholder="Ej. https://www.linkedin.com/in/jose-buten-10567117/">
+        </div>
+      </div>
+
+      <!-- Previews List -->
+      <div class="previews-container">
+        <!-- Design 1: Classic Horizontal (Green Accent) -->
+        <div class="signature-card">
+          <div class="signature-card-header">
+            <span class="signature-name">Diseño A: Horizontal Corporativo (Verde)</span>
+            <span class="signature-badge badge-green" style="background-color: rgba(19, 154, 67, 0.1); color: var(--beraxis-green);">Recomendado</span>
+          </div>
+          <div class="preview-box" id="design-a-box">
+            <!-- Rendered Signature A -->
+          </div>
+          <div class="actions-row">
+            <button class="btn-action btn-copy-rich" onclick="copyRichText('design-a-box', 'Diseño A (Verde)')">
+              <span>📋</span> Copiar para Gmail
+            </button>
+            <button class="btn-action btn-copy-html" onclick="copyRawHtml('design-a-box', 'Diseño A (Verde)')">
+              <span>&lt;/&gt;</span> Copiar Código HTML
+            </button>
+          </div>
+        </div>
+
+        <!-- Design 2: Premium Horizontal (Green Accent) -->
+        <div class="signature-card">
+          <div class="signature-card-header">
+            <span class="signature-name">Diseño B: Horizontal Premium (Verde)</span>
+            <span class="signature-badge badge-orange" style="background-color: rgba(243, 146, 0, 0.1); color: var(--beraxis-orange);">Alternativo</span>
+          </div>
+          <div class="preview-box" id="design-b-box">
+            <!-- Rendered Signature B -->
+          </div>
+          <div class="actions-row">
+            <button class="btn-action btn-copy-rich" onclick="copyRichText('design-b-box', 'Diseño B (Verde)')">
+              <span>📋</span> Copiar para Gmail
+            </button>
+            <button class="btn-action btn-copy-html" onclick="copyRawHtml('design-b-box', 'Diseño B (Verde)')">
+              <span>&lt;/&gt;</span> Copiar Código HTML
+            </button>
+          </div>
+        </div>
+
+        <!-- Design 3: Minimalist (No Images) -->
+        <div class="signature-card">
+          <div class="signature-card-header">
+            <span class="signature-name">Diseño C: Minimalista de Texto (Sin imágenes)</span>
+            <span class="signature-badge badge-blue" style="background-color: rgba(11, 37, 69, 0.1); color: var(--beraxis-blue);">Máxima compatibilidad</span>
+          </div>
+          <div class="preview-box" id="design-c-box">
+            <!-- Rendered Signature C -->
+          </div>
+          <div class="actions-row">
+            <button class="btn-action btn-copy-rich" onclick="copyRichText('design-c-box', 'Diseño C (Minimalista)')">
+              <span>📋</span> Copiar para Gmail
+            </button>
+            <button class="btn-action btn-copy-html" onclick="copyRawHtml('design-c-box', 'Diseño C (Minimalista)')">
+              <span>&lt;/&gt;</span> Copiar Código HTML
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guide Section -->
+    <div class="guide-section">
+      <h3 class="guide-title"><span style="color: var(--beraxis-green);">⚙️</span> ¿Cómo colocar la firma en Google Workspace / Gmail?</h3>
+      <div class="guide-steps">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <p class="step-text">
+            Completa tus datos en el formulario de la izquierda. Elige el diseño que prefieras y haz clic en el botón <strong>"Copiar para Gmail"</strong> de la firma correspondiente.
+          </p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <p class="step-text">
+            Abre tu correo de Gmail (Workspace), haz clic en el ícono de <strong>Configuración (Engranaje)</strong> en la esquina superior derecha y selecciona <strong>"Ver toda la configuración"</strong>.
+          </p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <p class="step-text">
+            En la pestaña <strong>General</strong>, desplázate hacia abajo hasta la sección <strong>"Firma"</strong>. Haz clic en <strong>"Crear nueva"</strong>, escribe un nombre para tu firma, haz clic dentro del cuadro de texto a la derecha y pega tu firma con <strong>Ctrl + V</strong> (o <strong>Cmd + V</strong> en Mac). Asegúrate de configurar los valores predeterminados de la firma para correos nuevos y respuestas, y luego haz clic en <strong>"Guardar cambios"</strong> al final de la página.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="brand-footer">
+    <p>© 2026 Beraxis. Todos los derechos reservados. Diseñado para la formalización corporativa.</p>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initThemeToggle();
+      initGenerator();
+    });
+
+    /**
+     * Theme Toggle
+     */
+    function initThemeToggle() {
+      const themeToggle = document.getElementById('theme-toggle');
+      const htmlElement = document.documentElement;
+      
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      htmlElement.setAttribute('data-theme', savedTheme);
+
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        showToast(`Modo ${newTheme === 'dark' ? 'Oscuro' : 'Claro'} activado`, 'info');
+      });
+    }
+
+    /**
+     * Generator Core Logic
+     */
+    function initGenerator() {
+      const inputs = {
+        name: document.getElementById('input-name'),
+        title: document.getElementById('input-title'),
+        email: document.getElementById('input-email'),
+        phone: document.getElementById('input-phone'),
+        linkedin: document.getElementById('input-linkedin')
+      };
+
+      // Register input listeners to update preview in real-time
+      Object.values(inputs).forEach(input => {
+        input.addEventListener('input', updatePreviews);
+      });
+
+      // Initial render
+      updatePreviews();
+
+      function updatePreviews() {
+        const data = {
+          name: inputs.name.value.trim() || 'Ing. José Buten',
+          title: inputs.title.value.trim() || 'CTO & Asesor Tecnológico',
+          email: inputs.email.value.trim() || 'jbuten@beraxis.com',
+          phone: inputs.phone.value.trim(),
+          linkedin: inputs.linkedin.value.trim() || 'https://www.linkedin.com/in/jose-buten-10567117/'
+        };
+
+        // Format phone lines
+        const phoneHtmlA = data.phone 
+          ? `<span style="margin-right: 10px;">📞 <a href="tel:${data.phone.replace(/[^+\d]/g, '')}" style="color: #0b2545; text-decoration: none; font-weight: 500;">${data.phone}</a></span>` 
+          : '';
+        const phoneHtmlB = data.phone 
+          ? `<div style="margin-bottom: 2px;">📞 <a href="tel:${data.phone.replace(/[^+\d]/g, '')}" style="color: #0b2545; text-decoration: none; font-weight: 500;">${data.phone}</a></div>` 
+          : '';
+        const phoneHtmlCMin = data.phone 
+          ? `<span style="margin-right: 8px;">Tel: <a href="tel:${data.phone.replace(/[^+\d]/g, '')}" style="color: #0b2545; text-decoration: none; font-weight: 500;">${data.phone}</a></span>` 
+          : '';
+
+        // Extract display LinkedIn handle
+        let linkedinHandle = 'linkedin.com/in/jose-buten-10567117';
+        try {
+          if (data.linkedin.includes('linkedin.com/in/')) {
+            const parts = data.linkedin.split('linkedin.com/in/');
+            if (parts[1]) {
+              linkedinHandle = 'linkedin.com/in/' + parts[1].replace(/\/$/, '');
+            }
+          }
+        } catch(e) {}
+
+        // Design A Template (Classic Horizontal with Isotipo, Green Divider)
+        const htmlA = `
+<table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.4; color: #0b2545; background-color: #ffffff; padding: 0px; margin: 0px;">
+  <tr>
+    <td style="padding-right: 15px; vertical-align: middle;">
+      <a href="https://www.beraxis.com" target="_blank" style="text-decoration: none;">
+        <img src="assets/isotipo_512.png" width="60" height="60" alt="Beraxis Isotipo" style="display: block; border: 0; width: 60px; height: 60px;" />
+      </a>
+    </td>
+    <td style="border-left: 2px solid #139a43; padding-right: 15px; height: 60px;"></td>
+    <td style="vertical-align: middle; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+      <div style="font-size: 15px; font-weight: bold; color: #0b2545; line-height: 1.2; margin-bottom: 2px;">${data.name}</div>
+      <div style="font-size: 12px; color: #139a43; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">${data.title}</div>
+      <div style="font-size: 11px; color: #718096; line-height: 1.4;">
+        <span style="margin-right: 10px;">📧 <a href="mailto:${data.email}" style="color: #0b2545; text-decoration: none; font-weight: 500;">${data.email}</a></span>
+        ${phoneHtmlA}
+        <span>🌐 <a href="https://www.beraxis.com" target="_blank" style="color: #0b2545; text-decoration: none; font-weight: 500;">www.beraxis.com</a></span>
+        <br />
+        <span>🔗 <a href="${data.linkedin}" target="_blank" style="color: #0b2545; text-decoration: none; font-weight: 500;">${linkedinHandle}</a></span>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" style="padding-top: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+      <div style="font-size: 8px; line-height: 1.4; color: #718096; text-align: justify; max-width: 460px; border-top: 1px solid #e2e8f0; padding-top: 8px;">
+        Este correo electrónico y cualquier archivo adjunto son confidenciales y están destinados únicamente al uso de la persona o entidad a la que van dirigidos. Si lo ha recibido por error, por favor notifíquelo al remitente y elimine este mensaje de su sistema.
+      </div>
+    </td>
+  </tr>
+</table>`;
+
+        // Design B Template (Premium Horizontal with Full Logo, Green Divider)
+        const htmlB = `
+<table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.4; color: #0b2545; background-color: #ffffff; padding: 0px; margin: 0px;">
+  <tr>
+    <td style="padding-right: 18px; vertical-align: middle;">
+      <a href="https://www.beraxis.com" target="_blank" style="text-decoration: none;">
+        <img src="assets/logo_principal.png" width="110" height="auto" alt="Beraxis Logo" style="display: block; border: 0; width: 110px; height: auto; max-height: 32px;" />
+      </a>
+    </td>
+    <td style="border-left: 2px solid #139a43; padding-right: 18px; height: 80px;"></td>
+    <td style="vertical-align: middle; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+      <div style="font-size: 15px; font-weight: bold; color: #0b2545; line-height: 1.2; margin-bottom: 2px;">${data.name}</div>
+      <div style="font-size: 11px; color: #718096; font-weight: 500; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.8px;">${data.title} <span style="color: #139a43;">|</span> BERAXIS</div>
+      <div style="font-size: 11px; color: #718096; line-height: 1.45;">
+        <div style="margin-bottom: 2px;">📧 <a href="mailto:${data.email}" style="color: #0b2545; text-decoration: none; font-weight: 500;">${data.email}</a></div>
+        ${phoneHtmlB}
+        <div style="margin-bottom: 2px;">🌐 <a href="https://www.beraxis.com" target="_blank" style="color: #0b2545; text-decoration: none; font-weight: 500;">www.beraxis.com</a></div>
+        <div>🔗 <a href="${data.linkedin}" target="_blank" style="color: #0b2545; text-decoration: none; font-weight: 500;">${linkedinHandle}</a></div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" style="padding-top: 14px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+      <div style="font-size: 8px; line-height: 1.4; color: #718096; text-align: justify; max-width: 480px; border-top: 1px solid #e2e8f0; padding-top: 8px;">
+        Este correo electrónico y cualquier archivo adjunto son confidenciales y están destinados únicamente al uso de la persona o entidad a la que van dirigidos. Si lo ha recibido por error, por favor notifíquelo al remitente y elimine este mensaje de su sistema.
+      </div>
+    </td>
+  </tr>
+</table>`;
+
+        // Design C Template (Minimalist Text, No Images)
+        const htmlC = `
+<table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.4; color: #0b2545; background-color: #ffffff; padding: 0px; margin: 0px;">
+  <tr>
+    <td style="border-left: 3px solid #139a43; padding-left: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+      <div style="font-size: 14px; font-weight: bold; color: #0b2545; line-height: 1.2; margin-bottom: 2px;">${data.name}</div>
+      <div style="font-size: 11px; color: #139a43; font-weight: 600; margin-bottom: 6px;">${data.title} <span style="color: #cbd5e0;">|</span> BERAXIS</div>
+      <div style="font-size: 11px; color: #718096; line-height: 1.4;">
+        <span style="margin-right: 8px;">Email: <a href="mailto:${data.email}" style="color: #0b2545; text-decoration: none; font-weight: 500;">${data.email}</a></span>
+        ${phoneHtmlCMin}
+        <span style="margin-right: 8px;">Web: <a href="https://www.beraxis.com" target="_blank" style="color: #0b2545; text-decoration: none; font-weight: 500;">beraxis.com</a></span>
+        <span>LinkedIn: <a href="${data.linkedin}" target="_blank" style="color: #0b2545; text-decoration: none; font-weight: 500;">${linkedinHandle.replace('linkedin.com/in/', '')}</a></span>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding-top: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+      <div style="font-size: 8px; line-height: 1.4; color: #718096; text-align: justify; max-width: 440px; border-top: 1px solid #e2e8f0; padding-top: 8px;">
+        Este correo electrónico y cualquier archivo adjunto son confidenciales y están destinados únicamente al uso de la persona o entidad a la que van dirigidos. Si lo ha recibido por error, por favor notifíquelo al remitente y elimine este mensaje de su sistema.
+      </div>
+    </td>
+  </tr>
+</table>`;
+
+        document.getElementById('design-a-box').innerHTML = htmlA;
+        document.getElementById('design-b-box').innerHTML = htmlB;
+        document.getElementById('design-c-box').innerHTML = htmlC;
+      }
+    }
+
+    /**
+     * Copy Rich Text (HTML formatting) to Clipboard so it can be pasted into Gmail's UI
+     */
+    window.copyRichText = function(containerId, designName) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      // Replace relative local assets with production absolute assets for the clipboard payload
+      let html = container.innerHTML;
+      html = html.replace(/src="assets\//g, 'src="https://www.beraxis.com/images/');
+      
+      const plainText = container.innerText;
+
+      try {
+        const blobHtml = new Blob([html], { type: 'text/html' });
+        const blobText = new Blob([plainText], { type: 'text/plain' });
+        
+        const clipboardItem = new ClipboardItem({
+          'text/html': blobHtml,
+          'text/plain': blobText
+        });
+
+        navigator.clipboard.write([clipboardItem]).then(() => {
+          showToast(`¡Firma "${designName}" copiada en formato visual! Ve a Gmail y pégala con Ctrl+V.`);
+        }).catch(err => {
+          console.error('Failed to copy rich text:', err);
+          // Fallback to text copy
+          navigator.clipboard.writeText(html).then(() => {
+            showToast('Copiado como código HTML (el navegador bloqueó el pegado directo)', 'info');
+          });
+        });
+      } catch (err) {
+        console.error('Error with Clipboard API:', err);
+        navigator.clipboard.writeText(html).then(() => {
+          showToast('Copiado como código HTML (error al procesar texto enriquecido)', 'info');
+        });
+      }
+    };
+
+    /**
+     * Copy Raw HTML code
+     */
+    window.copyRawHtml = function(containerId, designName) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      let html = container.innerHTML;
+      html = html.replace(/src="assets\//g, 'src="https://www.beraxis.com/images/').trim();
+
+      navigator.clipboard.writeText(html).then(() => {
+        showToast(`Código HTML de "${designName}" copiado al portapapeles.`);
+      }).catch(err => {
+        console.error('Error al copiar HTML:', err);
+        showToast('No se pudo copiar el código HTML', 'info');
+      });
+    };
+
+    /**
+     * Show Toast feedback
+     */
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      toast.className = `toast ${type === 'info' ? 'toast-info' : ''}`;
+      toast.innerHTML = `
+        <span>${type === 'success' ? '✓' : 'ℹ'}</span>
+        <span>${message}</span>
+      `;
+
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.remove();
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
